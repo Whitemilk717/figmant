@@ -1,0 +1,73 @@
+/* Centered box
+------------------------------------------------------------ */
+.centered-box {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+}
+
+
+/* Select
+------------------------------------------------------------ */
+.select {
+    height: 40px;
+    border-radius: 10px;
+    background-color: #EEEBEB;
+}
+
+
+/* End simulation button
+------------------------------------------------------------ */
+.end-simulation-button {
+    height: 40px;
+    border-radius: 10px;
+    border-color: #f44336;
+    background-color: #EEEBEB;
+}
+
+.end-simulation-button:hover {
+    color: white;
+    background-color: #f44336;
+}
+
+
+/* Premade answers
+------------------------------------------------------------ */
+.premade-answers-box { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.premade-answer-button {
+    height: 40px;
+    border-radius: 10px;
+    border-color: #04AA6D;
+    background-color: #EEEBEB;
+}
+
+.premade-answer-button:hover {
+    color: white;
+    background-color: #04AA6D;
+}
+
+
+/* Custom answer box
+------------------------------------------------------------ */
+.custom-answer-box {
+    border-radius: 10px;
+    background-color: #DBF7E8;
+}
+
+.send-custom-answer-button {
+    height: 40px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border-color: #04AA6D;
+    background-color: #EEEBEB;
+}
+
+.send-custom-answer-button:hover {
+    color: white;
+    background-color: #04AA6D;
+}

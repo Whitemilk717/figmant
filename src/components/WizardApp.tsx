@@ -1,9 +1,9 @@
 /* Imports
 ------------------------------------------------------------ */
+import '../styles/style';
 import * as React from 'react';
-import { useRef, useState, useEffect } from 'react';
 import { EditComponent } from './EditComponent';
-import { select, button, centeredBox } from '../styles/wizardAppStyle';
+import { useRef, useState, useEffect } from 'react';
 
 
 /* WizardApp React component 
@@ -51,9 +51,8 @@ export const WizardApp = () => {
         <div>
             
             <p>Select a mode:</p>
-            {/* <div style={ centeredBox }>     */}
-            <div>
-                <select style={ select } onChange={ (e) => setMode(e.target.value) } >
+            <div className='centered-box'>
+                <select className='select' onChange={ (e) => setMode(e.target.value) } >
                     <option value='create'>Create</option>
                     <option value='edit'>Edit</option>
                     <option value='delete'>Delete</option>
@@ -84,9 +83,8 @@ export const WizardApp = () => {
             <hr />
 
             <p>End WoZ simulation:</p>
-            {/* <div style={ centeredBox }>  */}
-            <div>
-                <button style={ button } onClick={ () => closePlugin() }>End simulation</button>
+            <div className='centered-box'>
+                <button className='end-simulation-button' onClick={ () => closePlugin() }>End simulation</button>
             </div>
 
         </div>

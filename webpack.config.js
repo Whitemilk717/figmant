@@ -8,11 +8,15 @@ module.exports = (env, argv) => ({
   devtool: argv.mode === 'production' ? false : 'inline-source-map',
 
   resolve: {
-    extensions: ['.tsx', '.ts', '...'],
+    extensions: ['.tsx', '.ts', '.css', '...'],
   },
   entry: {
     ui: './src/ui.tsx',
     code: './src/code.ts',
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -20,6 +24,10 @@ module.exports = (env, argv) => ({
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.sass$/,
@@ -41,6 +49,7 @@ module.exports = (env, argv) => ({
       filename: 'ui.html',
       inlineSource: '.(js)$',
       chunks: ['ui'],
+      cache: false,
     }),
     new HtmlInlineScriptPlugin(),
   ],

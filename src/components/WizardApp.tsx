@@ -2,8 +2,9 @@
 ------------------------------------------------------------ */
 import '../styles/style';
 import * as React from 'react';
+import { useState } from 'react';
 import { EditComponent } from './EditComponent';
-import { useRef, useState, useEffect } from 'react';
+import { CreateComponent } from './CreateComponent';
 
 
 /* WizardApp React component 
@@ -11,7 +12,6 @@ import { useRef, useState, useEffect } from 'react';
 export const WizardApp = () => {
 
     const [mode, setMode] = useState('create');                     // Mode selected by the wizard (default = create)
-    const wizardText = useRef('');                                  // Text inserted by the wizard
     const [textNodes, setTextNodes] = useState([]);                 // Selectable text nodes present in figma canvas
     const [selectedComponent, setSelectedComponent] = useState(''); // Mode selected by the wizard
 
@@ -53,29 +53,35 @@ export const WizardApp = () => {
             <p>Select a mode:</p>
             <div className='centered-box'>
                 <select className='select' onChange={ (e) => setMode(e.target.value) } >
-                    <option value='create'>Create</option>
-                    <option value='edit'>Edit</option>
-                    <option value='delete'>Delete</option>
+                    <option value='create'>Create new answer</option>
+                    <option value='edit'>Edit answer</option>
+                    <option value='delete'>Delete answer</option>
                 </select>
             </div>
 
             <hr />
 
+
+            {/* Create mode
+            ------------------------------------------------ */}
             { mode === 'create' &&  (
-                <div>
-                    <p>Create a new component:</p>
-                </div>
+                <CreateComponent />
             )}
-                
+
+
+            {/* Edit mode
+            ------------------------------------------------ */}    
             { mode === 'edit' && (
                 <EditComponent 
                 textNodes={ textNodes }
-                wizardText={ wizardText }
                 selectedComponent={ selectedComponent }
                 setSelectedComponent={ setSelectedComponent }
                 />
             )}
 
+
+            {/* Delete mode
+            ------------------------------------------------ */}
             { mode === 'delete' && (
                 <p>Delete mode</p>
             )}

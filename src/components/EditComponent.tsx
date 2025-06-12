@@ -2,11 +2,14 @@
 ------------------------------------------------------------ */
 import '../styles/style';
 import * as React from 'react';
+import { useRef } from 'react';
 
 
-/* WizardApp React component 
+/* EditComponent 
 ------------------------------------------------------------ */
 export const EditComponent = (props) => {
+
+    const wizardText = useRef<HTMLTextAreaElement>(null);   // Text inserted by the wizard
 
 
     /* Function to change a text component
@@ -15,7 +18,7 @@ export const EditComponent = (props) => {
         if (premadeAnswer.length != 0) {
             parent.postMessage({
                 pluginMessage: {
-                    type: 'changeText',
+                    type: 'changeAnswer',
                     textNodeName: props.selectedComponent,
                     newCharacters: premadeAnswer
                 }
@@ -23,9 +26,9 @@ export const EditComponent = (props) => {
         } else {
             parent.postMessage({
                 pluginMessage: {
-                    type: 'changeText',
+                    type: 'changeAnswer',
                     textNodeName: props.selectedComponent,
-                    newCharacters: props.wizardText.current.value
+                    newCharacters: wizardText.current.value
                 }
             }, '*');
         }
@@ -36,7 +39,7 @@ export const EditComponent = (props) => {
     -------------------------------------------------------- */
     return (
         <div>
-            <p>Edit a component:</p>
+            <p>Select the message:</p>
             <div className='centered-box'>
                 <select className='select' onChange={ (e) => props.setSelectedComponent(e.target.value) }>
                     { props.textNodes.map(node => {
@@ -58,7 +61,7 @@ export const EditComponent = (props) => {
 
             <p>Write your custom answer:</p>
             <form onSubmit={ (e) => { e.preventDefault(); changeText('') }}>
-                <textarea className='custom-answer-box' rows={ 4 } cols={ 43 } ref={ props.wizardText }></textarea>
+                <textarea className='custom-answer-box' rows={ 4 } cols={ 43 } ref={ wizardText }></textarea>
                 <div className='centered-box'>
                     <button className='send-custom-answer-button' type="submit">Invia</button>
                 </div>

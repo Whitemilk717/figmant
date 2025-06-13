@@ -14,12 +14,12 @@ export const EditComponent = (props) => {
 
     /* Function to change a text component
     -------------------------------------------------------- */
-    function changeText(premadeAnswer: string): void {
+    function sendMessage(premadeAnswer: string): void {
         if (premadeAnswer.length != 0) {
             parent.postMessage({
                 pluginMessage: {
                     type: 'changeAnswer',
-                    textNodeName: props.selectedComponent,
+                    answer: props.selectedComponent,
                     newCharacters: premadeAnswer
                 }
             }, '*');
@@ -27,7 +27,7 @@ export const EditComponent = (props) => {
             parent.postMessage({
                 pluginMessage: {
                     type: 'changeAnswer',
-                    textNodeName: props.selectedComponent,
+                    answer: props.selectedComponent,
                     newCharacters: wizardText.current.value
                 }
             }, '*');
@@ -52,18 +52,18 @@ export const EditComponent = (props) => {
 
             <p>Pre-made answers:</p>
             <div className='premade-answers-box'>
-                <button className='premade-answer-button' onClick={ () => changeText('Pasta') }>Pasta</button>
-                <button className='premade-answer-button' onClick={ () => changeText('Salad') }>Salad</button>
-                <button className='premade-answer-button' onClick={ () => changeText('Thinking...') }>Thinking...</button>
+                <button className='green-button' onClick={ () => sendMessage('Pasta') }>Pasta</button>
+                <button className='green-button' onClick={ () => sendMessage('Salad') }>Salad</button>
+                <button className='green-button' onClick={ () => sendMessage('Thinking...') }>Thinking...</button>
             </div>
 
             <hr />
 
             <p>Write your custom answer:</p>
-            <form onSubmit={ (e) => { e.preventDefault(); changeText('') }}>
+            <form onSubmit={ (e) => { e.preventDefault(); sendMessage('') }}>
                 <textarea className='custom-answer-box' rows={ 4 } cols={ 43 } ref={ wizardText }></textarea>
                 <div className='centered-box'>
-                    <button className='send-custom-answer-button' type="submit">Invia</button>
+                    <button className='spaced-green-button' type="submit">Invia</button>
                 </div>
             </form>
         </div>

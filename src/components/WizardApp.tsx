@@ -19,7 +19,7 @@ export const WizardApp = () => {
     /* Text node list handler 
     -------------------------------------------------------- */
     onmessage = (event) => {
-        if (event.data.pluginMessage.type === 'textNodes') {
+        if (event.data.pluginMessage.type === 'answers') {
             setTextNodes(event.data.pluginMessage.payload);
         }
     }

@@ -13,7 +13,7 @@ export const sortBox = {
 
     /* Function to sort <question/answers>-frame-<num> nodes
     -------------------------------------------------------- */
-    sortChatBoxFrames: function (frameA: SceneNode, frameB: SceneNode): number {
+    sortChatBoxMessages: function (frameA: SceneNode, frameB: SceneNode): number {
         const [qaA, , numA] = frameA.name.split('-');                               // qa can be 'question' or 'answers'
         const [qaB, , numB] = frameB.name.split('-');
         

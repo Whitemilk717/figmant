@@ -4,6 +4,7 @@ import { sortBox } from './figma-tools/sortBox';
 import { searchBox } from './figma-tools/searchBox';
 import { changeAnswerHandler } from './figma-tools/changeAnswerHandler';
 import { createAnswerHandler } from './figma-tools/createAnswerHandler';
+import { nextQuestionHandler } from './figma-tools/nextQuestionHandler';
 
 
 /* ui.html rendering inside Figma popup
@@ -22,15 +23,12 @@ figma.showUI(
 ------------------------------------------------------------ */
 figma.loadFontAsync({ family: "Inter", style: "Italic" });  // Makes a font available in the plugin for use
 
-let textNodes: string[] = [];
-figma.currentPage.findAll(searchBox.searchAnswerNodes)
-    .sort(sortBox.sortAnswerTexts)
-    .forEach(node => textNodes.push(node.name)
-);
+let answers: string[] = [];
+figma.currentPage.findAll(searchBox.searchAnswers).forEach(node => answers.push(node.name));
 
 figma.ui.postMessage({
-    type: 'textNodes',
-    payload: textNodes
+    type: 'answers',
+    payload: answers
 });
 
 
@@ -44,6 +42,10 @@ figma.ui.onmessage = (message) => {
 
     else if (message.type === 'createAnswer') {
         createAnswerHandler(message);
+    }
+
+    else if (message.type === 'nextQuestion') {
+        nextQuestionHandler();
     }
 
     else if (message.type && message.type === 'closePlugin') {

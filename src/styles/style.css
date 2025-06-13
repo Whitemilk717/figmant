@@ -39,18 +39,6 @@
     justify-content: space-around;
 }
 
-.premade-answer-button {
-    height: 40px;
-    border-radius: 10px;
-    border-color: #04AA6D;
-    background-color: #EEEBEB;
-}
-
-.premade-answer-button:hover {
-    color: white;
-    background-color: #04AA6D;
-}
-
 
 /* Custom answer box
 ------------------------------------------------------------ */
@@ -59,7 +47,23 @@
     background-color: #DBF7E8;
 }
 
-.send-custom-answer-button {
+
+
+/* Green buttons
+------------------------------------------------------------ */
+.green-button {
+    height: 40px;
+    border-radius: 10px;
+    border-color: #04AA6D;
+    background-color: #EEEBEB;
+}
+
+.green-button:hover {
+    color: white;
+    background-color: #04AA6D;
+}
+
+.spaced-green-button {
     height: 40px;
     margin-top: 5px;
     border-radius: 10px;
@@ -67,7 +71,7 @@
     background-color: #EEEBEB;
 }
 
-.send-custom-answer-button:hover {
+.spaced-green-button:hover {
     color: white;
     background-color: #04AA6D;
 }

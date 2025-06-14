@@ -1,13 +1,12 @@
 /* Imports 
 ------------------------------------------------------------ */
-import { sortBox } from './figma-tools/sortBox';
-import { searchBox } from './figma-tools/searchBox';
-import { changeAnswerHandler } from './figma-tools/changeAnswerHandler';
-import { createAnswerHandler } from './figma-tools/createAnswerHandler';
-import { nextQuestionHandler } from './figma-tools/nextQuestionHandler';
+import { editAnswer } from './figma/msg-handlers/editAnswer';
+import { searchBox } from './figma/searchBox';
+import { createAnswer } from './figma/msg-handlers/createAnswer';
+import { createQuestion } from './figma/msg-handlers/createQuestion';
 
 
-/* ui.html rendering inside Figma popup
+/* ui.html rendering inside Figma ui popup
 ------------------------------------------------------------ */
 figma.showUI(
     __html__,
@@ -19,12 +18,14 @@ figma.showUI(
 );
 
 
-/* Figma setup and sending of selectable text nodes
+/* Figma setup and sending of selectable answer nodes
 ------------------------------------------------------------ */
 figma.loadFontAsync({ family: "Inter", style: "Italic" });  // Makes a font available in the plugin for use
 
 let answers: string[] = [];
-figma.currentPage.findAll(searchBox.searchAnswers).forEach(node => answers.push(node.name));
+figma.currentPage
+    .findAll(searchBox.answers)
+    .forEach(node => answers.push(node.name));
 
 figma.ui.postMessage({
     type: 'answers',
@@ -34,21 +35,21 @@ figma.ui.postMessage({
 
 /* Handler for messages received from React components
 ------------------------------------------------------------ */
-figma.ui.onmessage = (message) => {
-
-    if (message.type === 'changeAnswer') {
-        changeAnswerHandler(message);
+figma.ui.onmessage = (msg) => {
+    
+    if (msg.type === 'createAnswer') {
+        createAnswer(msg);
     }
 
-    else if (message.type === 'createAnswer') {
-        createAnswerHandler(message);
+    else if (msg.type === 'editAnswer') {
+        editAnswer(msg);
     }
 
-    else if (message.type === 'nextQuestion') {
-        nextQuestionHandler();
+    else if (msg.type === 'createQuestion') {
+        createQuestion();
     }
 
-    else if (message.type && message.type === 'closePlugin') {
+    else if (msg.type === 'closePlugin') {
         figma.closePlugin();
     }
 }

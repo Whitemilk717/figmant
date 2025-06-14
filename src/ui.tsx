@@ -1,12 +1,11 @@
 /* Imports
 ------------------------------------------------------------ */
 import * as React from 'react';
+import { WizardApp } from './react/WizardApp'
 import { createRoot } from 'react-dom/client';
-import { WizardApp } from './components/WizardApp'
-                       // './components/WizardApp';
 
 
-/* WizardApp.tsx rendering inside Figma popup
+/* WizardApp.tsx rendering inside Figma ui popup
 ------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', function() {      // When ui.html is loaded on the DOM
     const domNode = document.getElementById('root');    

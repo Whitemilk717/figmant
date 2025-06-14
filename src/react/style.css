@@ -16,16 +16,16 @@
 }
 
 
-/* End simulation button
+/* Red button
 ------------------------------------------------------------ */
-.end-simulation-button {
+.red-button {
     height: 40px;
     border-radius: 10px;
     border-color: #f44336;
     background-color: #EEEBEB;
 }
 
-.end-simulation-button:hover {
+.red-button:hover {
     color: white;
     background-color: #f44336;
 }

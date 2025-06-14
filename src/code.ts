@@ -12,7 +12,7 @@ figma.showUI(
     __html__,
     { 
         width: 360,
-        height: 580,
+        height: 710,
         title: "Wizard control panel"
     }
 );

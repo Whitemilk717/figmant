@@ -39,6 +39,10 @@ export const WizardApp = () => {
     // JSX 
     return (
         <div>
+
+            <p>Here are your personal notes:</p>
+            <textarea className='notes-box' rows={ 4 } cols={ 43 }></textarea>
+            <hr />
             
             <p>Select a mode:</p>
             <div className='centered-box'>

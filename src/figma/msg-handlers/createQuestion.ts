@@ -1,6 +1,7 @@
 /* Imports
 ------------------------------------------------------------ */
-import { searchBox } from '../searchBox';
+import { sendBox } from '../boxes/sendBox';
+import { searchBox } from '../boxes/searchBox';
 
 
 /* Function to create a question node
@@ -30,4 +31,8 @@ export async function createQuestion() {
     nextNumber = String(searchBox.nextUserQuestionNumber(chatBox));
     newAnswer.name = newAnswer.name.concat('-', nextNumber);
     chatBox.appendChild(newAnswer);
+
+
+    // Send to WizardApp every selectable chatbox node and answer node 
+    sendBox.sendAll();
 }

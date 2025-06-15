@@ -7,13 +7,20 @@
 }
 
 
-/* Select
+/* Selects
 ------------------------------------------------------------ */
-.select {
+.single-select {
     height: 40px;
     border-radius: 10px;
     background-color: #EEEBEB;
 }
+
+.multiple-select {
+    height: 200px;
+    border-radius: 10px;
+    background-color: #EEEBEB;
+}
+
 
 
 /* Red button

@@ -7,7 +7,7 @@ import { useRef } from 'react';
 
 /* CreateAnswer
 ------------------------------------------------------------ */
-export const CreateMode = (props) => {
+export const CreateMode = () => {
 
 
     // Data
@@ -46,9 +46,9 @@ export const CreateMode = (props) => {
         <div>
             <p>Pre-made Answers:</p>
             <div className='premade-answers-box'>
+                <button className='green-button' onClick={ () => sendMsg('Thinking...', false) }>Thinking...</button>
                 <button className='green-button' onClick={ () => sendMsg("I don't know", false) }>I don't know</button>
                 <button className='green-button' onClick={ () => sendMsg('Can you repeat?', false) }>Can you repeat?</button>
-                <button className='green-button' onClick={ () => sendMsg('Thinking...', false) }>Thinking...</button>
             </div>
             <hr />
 

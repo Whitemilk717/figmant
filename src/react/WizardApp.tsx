@@ -4,6 +4,7 @@ import './style';
 import * as React from 'react';
 import { useState } from 'react';
 import { EditMode } from './mode-components/EditMode';
+import { HideMode } from './mode-components/HideMode';
 import { CreateMode } from './mode-components/CreateMode';
 
 
@@ -13,16 +14,17 @@ export const WizardApp = () => {
 
 
     // Data
-    const [mode, setMode] = useState('create');                     // Mode selected by the wizard
-    const [answers, setAnswers] = useState([]);                     // Selectable answers present in Figma canvas
+    const [nodes, setNodes] = useState([]);     // Selectable nodes present in the chatbox
+    const [answers, setAnswers] = useState([]); // Selectable answers present in the chatbox
+    const [mode, setMode] = useState('create'); // Mode selected by the wizard
     
 
 
-    // Saving available selectable answers
+    // Saving available selectable nodes and answers 
     onmessage = (msg) => {
-        if (msg.data.pluginMessage.type === 'answers') {
-            setAnswers(msg.data.pluginMessage.payload);
-        }
+        console.log(msg);
+        setNodes(msg.data.pluginMessage.nodes);
+        setAnswers(msg.data.pluginMessage.answers);
     }
 
 
@@ -46,10 +48,10 @@ export const WizardApp = () => {
             
             <p>Select a mode:</p>
             <div className='centered-box'>
-                <select className='select' onChange={ (e) => setMode(e.target.value) } >
+                <select className='single-select' onChange={ (e) => setMode(e.target.value) } >
                     <option value='create'>Create new answer</option>
                     <option value='edit'>Edit answer</option>
-                    <option value='delete'>Delete answer</option>
+                    <option value='hide'>Hide messages and icons</option>
                 </select>
             </div>
             <hr />
@@ -62,8 +64,8 @@ export const WizardApp = () => {
                 <EditMode answers={ answers } />
             )}
 
-            { mode === 'delete' && (
-                <p>Delete mode</p>
+            { mode === 'hide' && (
+                <HideMode nodes={ nodes } />
             )}
             <hr />
 

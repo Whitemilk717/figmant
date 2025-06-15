@@ -1,23 +1,24 @@
 /* Imports
 ------------------------------------------------------------ */
-import { searchBox } from '../searchBox';
+import { sendBox } from '../boxes/sendBox';
+import { searchBox } from '../boxes/searchBox';
 
 
 /* Function to create an answer node
 ------------------------------------------------------------ */
-export async function createAnswer(message) {
+export async function createAnswer(msg) {
 
 
     // Data
     const iconComp = figma.currentPage.findOne(searchBox.botIconComp) as ComponentNode;
     const answerComp = figma.currentPage.findOne(searchBox.botAnswerComp) as ComponentNode;
     const chatBox = figma.currentPage.findOne(searchBox.chatBox) as FrameNode;
-    const lastMessage = chatBox.children[chatBox.children.length - 1];
+    const lastMsg = chatBox.children[chatBox.children.length - 1];
     let nextNumber;
 
 
-    // If it's the first message, add the icon
-    if (!lastMessage || lastMessage.name.includes('user-question')) {
+    // If it's the first msg, add the icon
+    if (!lastMsg || lastMsg.name.includes('user-question')) {
         const newIcon = iconComp.createInstance();
         nextNumber = String(searchBox.nextBotIconNumber(chatBox));
         newIcon.name = newIcon.name.concat('-', nextNumber);
@@ -31,15 +32,10 @@ export async function createAnswer(message) {
     newAnswer.name = newAnswer.name.concat('-', nextNumber);
 
     const newText = newAnswer.children[0] as TextNode;
-    newText.characters = message.payload;
+    newText.characters = msg.payload;
     chatBox.appendChild(newAnswer);
 
 
-    // Send to WizardApp every selectable answer
-    let answers: string[] = [];
-    figma.currentPage.findAll(searchBox.answers).forEach(node => answers.push(node.name));
-    figma.ui.postMessage({
-        type: 'answers',
-        payload: answers
-    });
+    // Send to WizardApp every selectable chatbox node and answer node 
+    sendBox.sendAll();
 }

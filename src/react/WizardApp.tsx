@@ -22,7 +22,6 @@ export const WizardApp = () => {
 
     // Saving available selectable nodes and answers 
     onmessage = (msg) => {
-        console.log(msg);
         setNodes(msg.data.pluginMessage.nodes);
         setAnswers(msg.data.pluginMessage.answers);
     }

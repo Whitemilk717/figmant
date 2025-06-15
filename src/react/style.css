@@ -7,6 +7,16 @@
 }
 
 
+/* Centered checkbox
+------------------------------------------------------------ */
+.centered-checkbox {
+    gap: 5px;
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+}
+
+
 /* Selects
 ------------------------------------------------------------ */
 .single-select {

@@ -18,7 +18,7 @@ export async function createAnswer(msg) {
 
 
     // If it's the first msg, add the icon
-    if (!lastMsg || lastMsg.name.includes('user-question')) {
+    if (msg.iconFlag) {
         const newIcon = iconComp.createInstance();
         nextNumber = String(searchBox.nextBotIconNumber(chatBox));
         newIcon.name = newIcon.name.concat('-', nextNumber);

@@ -2,7 +2,7 @@
 ------------------------------------------------------------ */
 import '../style';
 import * as React from 'react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 
 /* CreateAnswer
@@ -11,7 +11,8 @@ export const CreateMode = () => {
 
 
     // Data
-    const wizardText = useRef<HTMLTextAreaElement>(null);   // Text inserted by the wizard
+    const wizardText = useRef(null);                    // Text inserted by the wizard
+    const [iconFlag, setIconFlag] = useState(false);    // Does the icon need to be inserted?
 
 
     // Function to send the creation message (both answer and question)
@@ -22,29 +23,31 @@ export const CreateMode = () => {
                     type: 'createQuestion'
                 }
             }, '*');
-        } 
-        else if (premadeAnswer.length != 0) {
-            parent.postMessage({
-                pluginMessage: {
-                    type: 'createAnswer',
-                    payload: premadeAnswer
-                }
-            }, '*');
-        } else {
-            parent.postMessage({
-                pluginMessage: {
-                    type: 'createAnswer',
-                    payload: wizardText.current.value
-                }
-            }, '*');
+            return;
         }
+
+        parent.postMessage({
+            pluginMessage: {
+                type: 'createAnswer',
+                iconFlag : iconFlag,
+                payload: premadeAnswer.length != 0
+                ? premadeAnswer
+                : wizardText.current.value
+            }
+        }, '*');
     }
 
 
     // JSX
     return (
         <div>
-            <p>Pre-made Answers:</p>
+            <div className='centered-checkbox'>    
+                <input type="checkbox" checked={ iconFlag } id='iconFlag' onChange={ (e) => setIconFlag(e.target.checked) } />
+                <label htmlFor="iconFlag">Message with icon</label>
+            </div>
+            <hr />
+
+            <p>Pre-made answers:</p>
             <div className='premade-answers-box'>
                 <button className='green-button' onClick={ () => sendMsg('Thinking...', false) }>Thinking...</button>
                 <button className='green-button' onClick={ () => sendMsg("I don't know", false) }>I don't know</button>
@@ -52,7 +55,7 @@ export const CreateMode = () => {
             </div>
             <hr />
 
-            <p>Write your custom Answer:</p>
+            <p>Write your custom answer:</p>
             <form onSubmit={ (e) => { e.preventDefault(); sendMsg('', false) }}>
                 <textarea className='custom-answer-box' rows={ 4 } cols={ 43 } ref={ wizardText }></textarea>
                 <div className='centered-box'>

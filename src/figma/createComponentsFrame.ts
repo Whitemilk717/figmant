@@ -20,7 +20,7 @@ export async function createComponentsFrame() {
 
     // Creation and configuration of the user icon component
     const userIconComp = figma.createComponent();
-    setIcon(userIconComp, 'user-icon', '#D9D9D9');
+    await setIcon(userIconComp, 'user-icon', '#D9D9D9');
     frame.appendChild(userIconComp);
 
 
@@ -30,13 +30,13 @@ export async function createComponentsFrame() {
     frame.appendChild(userQuestionComp);
 
 
-    // Creation the bot icon component
+    // Creation of the bot icon component
     const botIconComp = figma.createComponent();
-    setIcon(botIconComp, 'bot-icon', '#9EFFCA');
+    await setIcon(botIconComp, 'bot-icon', '#9EFFCA');
     frame.appendChild(botIconComp);
     
 
-    // Creation the bot answer component
+    // Creation of the bot answer component
     const botAnswerComp = figma.createComponent();
     setMsg(botAnswerComp, 'bot-answer', '#9EFFCA', defaultFontName, 'Answer')
     frame.appendChild(botAnswerComp);
@@ -70,12 +70,41 @@ function setFrame(frame: FrameNode) {
 
 /* Function to set the icon component frame
 ------------------------------------------------------------ */
-function setIcon(icon, name, color) {
+async function setIcon(icon, name, color) {
     icon.name = name;
     icon.resize(40, 40);
     icon.cornerRadius = 50;
     icon.lockAspectRatio();
     icon.fills = [figma.util.solidPaint(color)];
+
+    icon.layoutMode = 'VERTICAL';
+    icon.primaryAxisSizingMode = 'FIXED';
+    icon.counterAxisSizingMode = 'FIXED';
+    icon.counterAxisAlignItems = 'CENTER';
+    icon.primaryAxisAlignItems = 'CENTER';
+
+    // Get an image from a URL.
+    await figma.createImageAsync(
+        name.includes('user')
+        ? 'https://img.icons8.com/ios/100/user--v1.png'
+        : 'https://img.icons8.com/ios/100/robot-2--v1.png'
+    ).then(async (image: Image) => {
+
+        // Create the image node
+        const node = figma.createRectangle();
+        node.resize(icon.width - 10, icon.height - 10);
+        node.name = name + '-image';
+        node.fills = [{
+            type: 'IMAGE',
+            imageHash: image.hash,
+            scaleMode: 'FIT'
+        }];
+        node.constraints = {
+            horizontal: 'STRETCH',
+            vertical: 'STRETCH'
+        };
+        icon.appendChild(node);
+    });
 }
 
 

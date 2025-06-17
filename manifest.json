@@ -10,9 +10,9 @@
   ],
   "networkAccess": {
     "allowedDomains": [
-      "none"
+      "https://img.icons8.com"
     ]
   },
-    "main": "./dist/code.js",
-    "ui": "./dist/ui.html"
+  "main": "./dist/code.js",
+  "ui": "./dist/ui.html"
 }

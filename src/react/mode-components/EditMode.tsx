@@ -11,8 +11,8 @@ export const EditMode = (props) => {
 
 
     // Data
-    const wizardText = useRef<HTMLTextAreaElement>(null);                       // Text inserted by the wizard
-    const [targetAnswer, setTargetAnswer] = useState(props.answers[0].name);    // Answer selected by the wizard
+    const wizardText = useRef<HTMLTextAreaElement>(null);   // Text inserted by the wizard
+    const [targetAnswer, setTargetAnswer] = useState('');   // Answer selected by the wizard
 
 
     // Function to send the edit answer msg
@@ -37,13 +37,14 @@ export const EditMode = (props) => {
     }
 
 
-    // Whenever the selectable answers change, if possible, the first one is selected
+    // Whenever the selectable answers change, if possible and if nothing has been selected yet, the first one is selected.
     useEffect(() => {
-        if (props.answers.length != 0) {
+        console.log(targetAnswer);
+        if (props.answers.length != 0 && targetAnswer.length == 0) {
             setTargetAnswer(props.answers[0].name);
         }
-    }, [props.nodes]);
-
+    }, [props.answers]);
+    
 
     // JSX
     return (

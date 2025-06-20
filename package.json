@@ -11,7 +11,7 @@
   "license": "",
   "devDependencies": {
     "@figma/eslint-plugin-figma-plugins": "*",
-    "@figma/plugin-typings": "^1.113.0",
+    "@figma/plugin-typings": "^1.114.0",
     "@svgr/webpack": "^8.1.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",

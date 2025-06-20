@@ -79,6 +79,7 @@ async function main() {
             figma.closePlugin();
         }
     }
+
 }
 
 

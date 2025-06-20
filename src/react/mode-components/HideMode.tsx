@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 export const HideMode = (props) => {
 
     // // Data
-    const [targetNodes, setTargetNodes] = useState([props.nodes[0].name]);   // nodes selected by the wizard
+    const [targetNodes, setTargetNodes] = useState([]);   // nodes selected by the wizard
 
 
     // // Function to send the hide message
@@ -26,7 +26,7 @@ export const HideMode = (props) => {
 
     // Whenever the selectable nodes change, if possible, the first one is selected
     useEffect(() => {
-        if (props.nodes.length != 0) {
+        if (props.nodes.length != 0 && targetNodes.length == 0) {
             setTargetNodes([props.nodes[0].name]);
         }
     }, [props.nodes]);

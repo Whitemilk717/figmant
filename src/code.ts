@@ -38,9 +38,9 @@ async function main() {
 
     
     // Figma font setup (if it has been customized)
-    const botAnswerComp = figma.currentPage.findOne(searchBox.botAnswerComp) as FrameNode;
+    const botAnswerComp = figma.currentPage.findOne(searchBox.nodeNamed('bot-answer')) as FrameNode;
     const botFont = (botAnswerComp.children[0] as TextNode).fontName as FontName;
-    const userQuestionComp = figma.currentPage.findOne(searchBox.userQuestionComp) as FrameNode;    
+    const userQuestionComp = figma.currentPage.findOne(searchBox.nodeNamed('user-question')) as FrameNode;    
     const userFont = (userQuestionComp.children[0] as TextNode).fontName as FontName;
     
     await figma.loadFontAsync(botFont);
@@ -68,7 +68,7 @@ async function main() {
         }
     
         else if (msg.type === 'createQuestion') {
-            createQuestion();
+            createQuestion(msg);
         }
     
         else if (msg.type === 'hideNodes') {

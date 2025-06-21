@@ -10,9 +10,9 @@ export async function createAnswer(msg) {
 
 
     // Data
-    const iconComp = figma.currentPage.findOne(searchBox.botIconComp) as ComponentNode;
-    const answerComp = figma.currentPage.findOne(searchBox.botAnswerComp) as ComponentNode;
-    const chatBox = figma.currentPage.findOne(searchBox.chatBox) as FrameNode;
+    const iconComp = figma.currentPage.findOne(searchBox.nodeNamed('bot-icon')) as ComponentNode;
+    const answerComp = figma.currentPage.findOne(searchBox.nodeNamed('bot-answer')) as ComponentNode;
+    const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('chat-box')) as FrameNode;
     const lastMsg = chatBox.children[chatBox.children.length - 1];
     let nextNumber;
 
@@ -20,7 +20,7 @@ export async function createAnswer(msg) {
     // If it's the first msg, add the icon
     if (msg.iconFlag) {
         const newIcon = iconComp.createInstance();
-        nextNumber = String(searchBox.nextBotIconNumber(chatBox));
+        nextNumber = String(searchBox.nextCompNum(chatBox, 'bot-icon'));
         newIcon.name = newIcon.name.concat('-', nextNumber);
         chatBox.appendChild(newIcon);
     }
@@ -28,7 +28,7 @@ export async function createAnswer(msg) {
 
     // Add the new answer and edit its characters
     const newAnswer = answerComp.createInstance();
-    nextNumber = String(searchBox.nextBotAnswerNumber(chatBox));
+    nextNumber = String(searchBox.nextCompNum(chatBox, 'bot-answer'));
     newAnswer.name = newAnswer.name.concat('-', nextNumber);
 
     const newText = newAnswer.children[0] as TextNode;

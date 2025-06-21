@@ -12,7 +12,8 @@ export const CreateMode = () => {
 
     // Data
     const wizardText = useRef(null);                    // Text inserted by the wizard
-    const [iconFlag, setIconFlag] = useState(false);    // Does the icon need to be inserted?
+    const [answerIconFlag, setAnswerIconFlag] = useState(false);    // Does the icon need to be inserted?
+    const [questionIconFlag, setQuestionIconFlag] = useState(false);    // Does the icon need to be inserted?
 
 
     // Function to send the creation message (both answer and question)
@@ -20,7 +21,8 @@ export const CreateMode = () => {
         if (questionFlag) {
             parent.postMessage({
                 pluginMessage: {
-                    type: 'createQuestion'
+                    type: 'createQuestion',
+                    iconFlag : questionIconFlag,
                 }
             }, '*');
             return;
@@ -29,7 +31,7 @@ export const CreateMode = () => {
         parent.postMessage({
             pluginMessage: {
                 type: 'createAnswer',
-                iconFlag : iconFlag,
+                iconFlag : answerIconFlag,
                 payload: premadeAnswer.length != 0
                 ? premadeAnswer
                 : wizardText.current.value
@@ -42,8 +44,8 @@ export const CreateMode = () => {
     return (
         <div>
             <div className='centered-checkbox'>    
-                <input type="checkbox" checked={ iconFlag } id='iconFlag' onChange={ (e) => setIconFlag(e.target.checked) } />
-                <label htmlFor="iconFlag">Message with icon</label>
+                <input type="checkbox" checked={ answerIconFlag } id='answerIconFlag' onChange={ (e) => setAnswerIconFlag(e.target.checked) } />
+                <label htmlFor="answerIconFlag">Answer with icon</label>
             </div>
             <hr />
 
@@ -62,6 +64,12 @@ export const CreateMode = () => {
                     <button className='spaced-green-button' type="submit">Invia</button>
                 </div>
             </form>
+            <hr />
+
+            <div className='centered-checkbox'>    
+                <input type="checkbox" checked={ questionIconFlag } id='questionIconFlag' onChange={ (e) => setQuestionIconFlag(e.target.checked) } />
+                <label htmlFor="questionIconFlag">Question with icon</label>
+            </div>
             <hr />
 
             <div className='centered-box'>

@@ -10,7 +10,7 @@ export async function hideNodes(msg) {
 
 
     // General data
-    const chatBox = figma.currentPage.findOne(searchBox.chatBox) as FrameNode;
+    const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('chat-box')) as FrameNode;
 
     let botHiddenIconNum = 1;
     let userHiddenIconNum = 1;

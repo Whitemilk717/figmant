@@ -17,7 +17,7 @@ export function editAnswer(msg): void {
     // Edit the answer
     if (answer) {
         const text = answer.children[0] as TextNode;
-        text.characters = msg.payload;              // Text content replacement
+        text.characters = msg.payload;                  // Text content replacement
     }
 
 

@@ -112,9 +112,9 @@ export async function createQuestion(msg) {
 
 
     // Add the new question instance
-    const question = questionComp.createInstance();
+    const newQuestion = questionComp.createInstance();
     nextNumber = String(searchBox.nextCompNum(chatBox, 'user-question'));
-    question.name = question.name.concat('-', nextNumber);
+    newQuestion.name = newQuestion.name.concat('-', nextNumber);
 
 
     // Creation of the new text variable
@@ -128,7 +128,9 @@ export async function createQuestion(msg) {
         'STRING'
     );
     newVar.setValueForMode(modeId, 'Type here...');
-    question.children[0].setBoundVariable("characters", newVar);
+    ((newQuestion.children[0] as FrameNode)
+        .children[0] as TextNode)
+        .setBoundVariable("characters", newVar);
 
 
     // Reactions registration
@@ -258,8 +260,8 @@ export async function createQuestion(msg) {
 
         allReactions.push(reaction);
     }
-    await question.setReactionsAsync(allReactions);
-    chatBox.appendChild(question);
+    await newQuestion.setReactionsAsync(allReactions);
+    chatBox.appendChild(newQuestion);
 
 
     // Send to WizardApp every selectable chatbox node and answer node 

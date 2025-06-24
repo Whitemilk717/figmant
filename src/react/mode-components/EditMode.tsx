@@ -39,7 +39,6 @@ export const EditMode = (props) => {
 
     // Whenever the selectable answers change, if possible and if nothing has been selected yet, the first one is selected.
     useEffect(() => {
-        console.log(targetAnswer);
         if (props.answers.length != 0 && targetAnswer.length == 0) {
             setTargetAnswer(props.answers[0].name);
         }

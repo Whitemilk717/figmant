@@ -41,7 +41,8 @@ export const sendBox = {
 
             if (node.name.includes('question')){
                 const frame = node as FrameNode;                                        // cast
-                const text = frame.children[0] as TextNode;
+                const scrollableBox = frame.children[0] as FrameNode;
+                const text = scrollableBox.children[0] as TextNode;
                 infos = {
                     name: node.name,
                     preview: text.characters.slice(0, this.previewLength),

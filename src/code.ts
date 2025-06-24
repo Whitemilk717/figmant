@@ -2,12 +2,12 @@
 ------------------------------------------------------------ */
 import { sendBox } from './figma/boxes/sendBox';
 import { searchBox } from './figma/boxes/searchBox';
-import { createChatBox } from './figma/createChatBox';
 import { hideNodes } from './figma/msg-handlers/hideNodes';
 import { editAnswer } from './figma/msg-handlers/editAnswer';
 import { createAnswer } from './figma/msg-handlers/createAnswer';
 import { createQuestion } from './figma/msg-handlers/createQuestion';
-import { createComponentsFrame } from './figma/createComponentsFrame';
+import { createChatBox } from './figma/init-functions/createChatBox';
+import { createComponentsFrame } from './figma/init-functions/createComponentsFrame';
 
 
 /* Async function main (it calls some async functions)
@@ -17,9 +17,8 @@ async function main() {
 
     // Data
     const uiWidth = 360;
-    const uiHeight = 750;
+    const uiHeight = 780;
     const previewLength = 30;
-    
     
     
     // ui.html rendering inside Figma ui popup
@@ -41,8 +40,12 @@ async function main() {
     const botAnswerComp = figma.currentPage.findOne(searchBox.nodeNamed('bot-answer')) as FrameNode;
     const botFont = (botAnswerComp.children[0] as TextNode).fontName as FontName;
     const userQuestionComp = figma.currentPage.findOne(searchBox.nodeNamed('user-question')) as FrameNode;    
-    const userFont = (userQuestionComp.children[0] as TextNode).fontName as FontName;
-    
+    const userFont = (
+                        (userQuestionComp.children[0] as FrameNode)
+                        .children[0] as TextNode
+                    )
+                    .fontName as FontName;
+
     await figma.loadFontAsync(botFont);
     await figma.loadFontAsync(userFont);
     

@@ -53,66 +53,6 @@ export const searchBox = {
     },
 
 
-    // // Function to search for a new user icon number
-    // nextUserIconNumber: function (chatBox: FrameNode) {
-    //     let targetNumber = 1;
-        
-    //     chatBox.children.forEach(child => {
-    //         if (child.name.includes('user-icon')) {
-    //             let number = Number(child.name.split('-').pop());
-    //             if (number == targetNumber) targetNumber++;
-    //         }
-    //     });
-
-    //     return targetNumber;
-    // },
-
-
-    // // Function to search for a new user question number
-    // nextUserQuestionNumber: function (chatBox: FrameNode) {
-    //     let targetNumber = 1;
-        
-    //     chatBox.children.forEach(child => {
-    //         if (child.name.includes('user-question')) {
-    //             let number = Number(child.name.split('-').pop());
-    //             if (number == targetNumber) targetNumber++;
-    //         }
-    //     });
-
-    //     return targetNumber;
-    // },
-
-
-    // // Function to search for a new bot icon number
-    // nextBotIconNumber: function (chatBox: FrameNode): number {
-    //     let targetNumber = 1;
-        
-    //     chatBox.children.forEach(child => {
-    //         if (child.name.includes('bot-icon')) {
-    //             let number = Number(child.name.split('-').pop());
-    //             if (number == targetNumber) targetNumber++;
-    //         }
-    //     });
-
-    //     return targetNumber;
-    // },
-
-
-    // // Function to search for a new bot answer number
-    // nextBotAnswerNumber: function (chatBox: FrameNode): number {
-    //     let targetNumber = 1;
-        
-    //     chatBox.children.forEach(child => {
-    //         if (child.name.includes('bot-answer')) {
-    //             let number = Number(child.name.split('-').pop());
-    //             if (number == targetNumber) targetNumber++;
-    //         }
-    //     });
-
-    //     return targetNumber;
-    // },
-
-
     // Function to search for a new variable number
     nextVarNum: async function () {
         let targetNumber = 1;

@@ -8,7 +8,7 @@ import { searchBox } from "./searchBox";
 export const sendBox = {
 
 
-    // preview length and the corresponding setter
+    // Preview length and the corresponding setter
     previewLength: 0,
 
     setPreviewLength: function (previewLength: number): void {
@@ -27,7 +27,7 @@ export const sendBox = {
             if (node.name.includes('hidden')) return;
 
             if (node.name.includes('answer')){
-                const frame = node as FrameNode;                                        // cast
+                const frame = node as FrameNode;                                        // Cast
                 const text = frame.children[0] as TextNode;
                 infos = {
                     name: node.name,
@@ -40,7 +40,7 @@ export const sendBox = {
             }
 
             if (node.name.includes('question')){
-                const frame = node as FrameNode;                                        // cast
+                const frame = node as FrameNode;                                        // Cast
                 const scrollableBox = frame.children[0] as FrameNode;
                 const text = scrollableBox.children[0] as TextNode;
                 infos = {

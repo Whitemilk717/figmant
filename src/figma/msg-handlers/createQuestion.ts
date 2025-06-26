@@ -83,9 +83,9 @@ const keyCodes = {
     222: 'à',
 
     // Special keys
-    8: '',      // backspace
-    13: "?",    // enter is translated into a question mark
-    32: ' ',    // blank space
+    8: '',      // Backspace
+    13: "?",    // Enter is translated into a question mark
+    32: ' ',    // Blank space
 };
 
 
@@ -153,7 +153,7 @@ export async function createQuestion(msg) {
                 },
                 actions: [
                     {
-                        type: 'SET_VARIABLE',       // empty the variable
+                        type: 'SET_VARIABLE',       // Empty the variable
                         variableId: newVar.id,
                         variableValue: {
                             type: 'STRING',

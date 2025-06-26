@@ -11,8 +11,8 @@ export const CreateMode = () => {
 
 
     // Data
-    const wizardText = useRef(null);                    // Text inserted by the wizard
-    const [answerIconFlag, setAnswerIconFlag] = useState(false);    // Does the icon need to be inserted?
+    const wizardText = useRef(null);                                    // Text inserted by the wizard
+    const [answerIconFlag, setAnswerIconFlag] = useState(false);        // Does the icon need to be inserted?
     const [questionIconFlag, setQuestionIconFlag] = useState(false);    // Does the icon need to be inserted?
 
 

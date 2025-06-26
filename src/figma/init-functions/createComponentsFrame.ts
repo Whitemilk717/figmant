@@ -85,8 +85,8 @@ async function setIcon(icon, name, color) {
     // Get an image from a URL.
     const image = await figma.createImageAsync(
         name.includes('user')
-        ? 'https://img.icons8.com/?size=100&id=22396&format=png&color=000000'           // icons by icons8.com
-        : 'https://img.icons8.com/?size=100&id=4DFnl05gNOVV&format=png&color=000000'    // icons by icons8.com
+        ? 'https://img.icons8.com/?size=100&id=22396&format=png&color=000000'           // Icons by icons8.com
+        : 'https://img.icons8.com/?size=100&id=4DFnl05gNOVV&format=png&color=000000'    // Icons by icons8.com
     );
 
     // Create the image node

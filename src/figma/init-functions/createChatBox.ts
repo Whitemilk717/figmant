@@ -17,7 +17,7 @@ export function createChatBox() {
 
     chatBox.x = 0;
     chatBox.y = 350;
-    chatBox.itemSpacing = 10;                           // gap
+    chatBox.itemSpacing = 10;                           // Gap
     chatBox.resize(393, 657.63);
     chatBox.fills = [figma.util.solidPaint('#F2F2F2')];
 

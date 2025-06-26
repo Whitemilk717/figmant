@@ -9,11 +9,11 @@ import { useState, useEffect } from 'react';
 ------------------------------------------------------------ */
 export const HideMode = (props) => {
 
-    // // Data
+    // Data
     const [targetNodes, setTargetNodes] = useState([]);   // nodes selected by the wizard
 
 
-    // // Function to send the hide message
+    // Function to send the hide message
     function sendMsg(): void {
         parent.postMessage({
             pluginMessage: {

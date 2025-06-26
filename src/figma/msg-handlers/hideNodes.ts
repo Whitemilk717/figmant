@@ -32,22 +32,22 @@ export async function hideNodes(msg) {
 
         // Renaming hidden frames
         if (frame.name.includes('Bot-hidden-icon')) {
-            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + botHiddenIconNum;
+            frame.name = 'Bot-hidden-icon-' + botHiddenIconNum;
             frame.children[0].name = frame.name + ' / Image';
             botHiddenIconNum++;
         }
         if (frame.name.includes('User-hidden-icon')) {
-            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + userHiddenIconNum;
+            frame.name = 'User-hidden-icon-' + userHiddenIconNum;
             frame.children[0].name = frame.name + ' / Image';
             userHiddenIconNum++;
         }
         if (frame.name.includes('Bot-hidden-answer')) {
-            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + botHiddenAnswerNum;
+            frame.name = 'Bot-hidden-answer-' + botHiddenAnswerNum;
             frame.children[0].name = frame.name + ' / Text';
             botHiddenAnswerNum++;
         }
         if (frame.name.includes('User-hidden-question')) {
-            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + userHiddenQuestionNum;
+            frame.name = 'User-hidden-question-' + userHiddenQuestionNum;
             const scrollableBox = frame.children[0] as FrameNode;
             scrollableBox.name = frame.name + ' / Scrollable-box';
             scrollableBox.children[0].name = scrollableBox.name + ' / Text';
@@ -87,22 +87,22 @@ export async function hideNodes(msg) {
 
         // Renaming not hidden frames
         if (frame.name.includes('Bot-icon')) {
-            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + botIconNum;
+            frame.name = 'Bot-icon-' + botIconNum;
             frame.children[0].name = frame.name + ' / Image';
             botIconNum++;
         }
         if (frame.name.includes('User-icon')) {
-            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + userIconNum;
+            frame.name = 'User-icon-' + userIconNum;
             frame.children[0].name = frame.name + ' / Image';
             userIconNum++;
         }
         if (frame.name.includes('Bot-answer')) {
-            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + botAnswerNum;
+            frame.name = 'Bot-answer-' + botAnswerNum;
             frame.children[0].name = frame.name + ' / Text';
             botAnswerNum++;
         }
         if (frame.name.includes('User-question')) {
-            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + userQuestionNum;
+            frame.name = 'User-question-' + userQuestionNum;
             const scrollableBox = frame.children[0] as FrameNode;
             scrollableBox.name = frame.name + ' / Scrollable-box';
             scrollableBox.children[0].name = scrollableBox.name + ' / Text';

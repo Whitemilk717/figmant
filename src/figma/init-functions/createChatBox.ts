@@ -1,37 +1,37 @@
-/* Function to create the chatBox chatbox
+/* Function to create the chat box
 ------------------------------------------------------------ */
 export function createChatBox() {
 
 
-    // Creation of the chatbox
-    let chatbox = figma.currentPage.findOne(node => node.name === 'chat-box');
-    if (chatbox) {
-        figma.notify("'chat-box' already exists");
+    // Checking the existence of the chat box
+    let chatBox = figma.currentPage.findOne(node => node.name === 'Chat-box');
+    if (chatBox) {
+        figma.notify("'Chat-box' already exists");
         return;
     }
-    chatbox = figma.createFrame();
     
-
-    // Configuration of the chatbox
-    chatbox.name = 'chat-box';
-
-    chatbox.x = 0;
-    chatbox.y = 350;
-    chatbox.itemSpacing = 10;                           // gap
-    chatbox.resize(393, 657.63);
-    chatbox.fills = [figma.util.solidPaint('#F2F2F2')];
-
-    chatbox.paddingTop = 25;
-    chatbox.paddingLeft = 16;
-    chatbox.paddingRight = 16;
-    chatbox.paddingBottom = 25;
     
-    chatbox.layoutMode = 'VERTICAL';
-    chatbox.layoutSizingVertical = 'FIXED';
-    chatbox.layoutSizingHorizontal = 'FIXED';
-    chatbox.primaryAxisAlignItems = 'MIN';
-    chatbox.counterAxisAlignItems = 'CENTER';
+    // Configuration of the chat box
+    chatBox = figma.createFrame();
+    chatBox.name = 'Chat-box';
 
-    chatbox.clipsContent = true;
-    chatbox.overflowDirection = 'VERTICAL';
+    chatBox.x = 0;
+    chatBox.y = 350;
+    chatBox.itemSpacing = 10;                           // gap
+    chatBox.resize(393, 657.63);
+    chatBox.fills = [figma.util.solidPaint('#F2F2F2')];
+
+    chatBox.paddingTop = 25;
+    chatBox.paddingLeft = 16;
+    chatBox.paddingRight = 16;
+    chatBox.paddingBottom = 25;
+    
+    chatBox.layoutMode = 'VERTICAL';
+    chatBox.layoutSizingVertical = 'FIXED';
+    chatBox.layoutSizingHorizontal = 'FIXED';
+    chatBox.primaryAxisAlignItems = 'MIN';
+    chatBox.counterAxisAlignItems = 'CENTER';
+
+    chatBox.clipsContent = true;
+    chatBox.overflowDirection = 'VERTICAL';
 }

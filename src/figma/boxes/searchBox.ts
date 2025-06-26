@@ -6,33 +6,33 @@ export const searchBox = {
     // findOne argument functions
     nodeNamed: function (name: string) {
 
-        if (name === 'bot-icon') {
+        if (name === 'Bot-icon') {
             return function (node: SceneNode): boolean {
-                return (node.name === 'bot-icon'? true:false);
+                return (node.name === 'Bot-icon'? true:false);
             }
         }
 
-        if (name === 'bot-answer') {
+        if (name === 'Bot-answer') {
             return function (node: SceneNode): boolean {
-                return (node.name === 'bot-answer'? true:false);
+                return (node.name === 'Bot-answer'? true:false);
             }
         }
 
-        if (name === 'user-icon') {
+        if (name === 'User-icon') {
             return function (node: SceneNode): boolean {
-                return (node.name === 'user-icon'? true:false);
+                return (node.name === 'User-icon'? true:false);
             }
         }
 
-        if (name === 'user-question') {
+        if (name === 'User-question') {
             return function (node: SceneNode): boolean {
-                return (node.name === 'user-question'? true:false);
+                return (node.name === 'User-question'? true:false);
             }
         }
 
-        if (name === 'chat-box') {
+        if (name === 'Chat-box') {
             return function (node: SceneNode): boolean {
-                return (node.name === 'chat-box'? true:false);
+                return (node.name === 'Chat-box'? true:false);
             }
         }
     },
@@ -59,7 +59,7 @@ export const searchBox = {
         const variables = await figma.variables.getLocalVariablesAsync();
         
         variables.forEach(variable => {
-            if (variable.name.includes('text-var-')) {
+            if (variable.name.includes('Text-var-')) {
                 const number = Number(variable.name.split('-').pop())
                 if (number == targetNumber) targetNumber++;
             }

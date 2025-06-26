@@ -10,7 +10,7 @@ export async function createComponentsFrame() {
         return;
     } 
     frame = figma.createFrame();
-    setFrame(frame);
+    setComponentsFrame(frame);
     
 
     // Loading of the default font name
@@ -20,25 +20,26 @@ export async function createComponentsFrame() {
 
     // Creation and configuration of the user icon component
     const userIconComp = figma.createComponent();
-    await setIcon(userIconComp, 'user-icon', '#F4C788');
+    await setIcon(userIconComp, 'User-icon', '#F4C788');
     frame.appendChild(userIconComp);
+
 
     // Creation and configuration of the user question component
     const userQuestionComp = figma.createComponent();
-    setMsg(userQuestionComp, 'user-question', '#F4C788', defaultFontName, 'Question');
-    figma.variables.createVariableCollection('figmant collection');                     // Variables are created when they are needed
+    setMsg(userQuestionComp, 'User-question', '#F4C788', defaultFontName, 'Question');
+    figma.variables.createVariableCollection('Figmant collection');                     // Variables are created when they are needed
     frame.appendChild(userQuestionComp);
 
 
     // Creation and configuration of the bot icon component
     const botIconComp = figma.createComponent();
-    await setIcon(botIconComp, 'bot-icon', '#FFA9AB');
+    await setIcon(botIconComp, 'Bot-icon', '#FFA9AB');
     frame.appendChild(botIconComp);
     
 
     // Creation and configuration of the bot answer component
     const botAnswerComp = figma.createComponent();
-    setMsg(botAnswerComp, 'bot-answer', '#FFA9AB', defaultFontName, 'Answer')
+    setMsg(botAnswerComp, 'Bot-answer', '#FFA9AB', defaultFontName, 'Answer')
     frame.appendChild(botAnswerComp);
 }
 
@@ -46,7 +47,7 @@ export async function createComponentsFrame() {
 
 /* Function to set the component frame
 ------------------------------------------------------------ */
-function setFrame(frame: FrameNode) {
+function setComponentsFrame(frame: FrameNode) {
     frame.name = 'Components-frame';
 
     frame.x = 0;
@@ -91,7 +92,7 @@ async function setIcon(icon, name, color) {
     // Create the image node
     const node = figma.createRectangle();
     node.resize(icon.width - 10, icon.height - 10);
-    node.name = name + '-image';
+    node.name = name + ' / Image';
     node.fills = [{
         type: 'IMAGE',
         imageHash: image.hash,
@@ -128,17 +129,17 @@ function setMsg(msg, name, color, fontName, characters) {
 
     const text = figma.createText();
     text.fontName = fontName;
-    text.name = name + '-text';
     text.fontSize = 17;
     text.characters = characters;
     text.layoutAlign = 'STRETCH';           // Setting "STRETCH" will make the node "stretch" to fill the width of the parent vertical auto-layout frame
     text.textAutoResize = 'HEIGHT';         // The width of the textbox is fixed. Characters wrap to fit in the textbox. The height of the textbox automatically adjusts to fit its content
     text.textAlignHorizontal = 'CENTER';
 
-    if (name === 'user-question') {             // For the questions, the text is scrollable thanks to an additional container frame
+    if (name === 'User-question') {             // For the questions, the text is scrollable thanks to an additional container frame
         msg.primaryAxisSizingMode = 'FIXED';
 
         const scrollableBox = figma.createFrame();
+        scrollableBox.name = name + ' / Scrollable-box'
         scrollableBox.resize(360, 60);
 
         scrollableBox.layoutMode = 'VERTICAL';
@@ -151,11 +152,15 @@ function setMsg(msg, name, color, fontName, characters) {
         scrollableBox.overflowDirection = 'VERTICAL';
         
         msg.appendChild(scrollableBox);
+
+        text.name = scrollableBox.name + ' / Text';
         scrollableBox.appendChild(text);
     }
 
     else {
         msg.primaryAxisSizingMode = 'AUTO';
+
+        text.name = name + ' / Text';
         msg.appendChild(text);
     }
 }

@@ -10,7 +10,7 @@ export async function hideNodes(msg) {
 
 
     // General data
-    const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('chat-box')) as FrameNode;
+    const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('Chat-box')) as FrameNode;
 
     let botHiddenIconNum = 1;
     let userHiddenIconNum = 1;
@@ -22,76 +22,96 @@ export async function hideNodes(msg) {
     let botAnswerNum = 1;
     let userQuestionNum = 1;
 
-    let nodeType;
+    let frameType;
 
 
     // Hide routine
     chatBox.children.forEach(node => {
 
-        // rinomina i nodi nascosti
-        if (node.name.includes('bot-hidden-icon')) {
-            node.name = node.name.substring(0, node.name.lastIndexOf('-') + 1) + botHiddenIconNum;
+        const frame = node as FrameNode;    // Casting to get access to the children property
+
+        // Renaming hidden frames
+        if (frame.name.includes('Bot-hidden-icon')) {
+            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + botHiddenIconNum;
+            frame.children[0].name = frame.name + ' / Image';
             botHiddenIconNum++;
         }
-        if (node.name.includes('user-hidden-icon')) {
-            node.name = node.name.substring(0, node.name.lastIndexOf('-') + 1) + userHiddenIconNum;
+        if (frame.name.includes('User-hidden-icon')) {
+            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + userHiddenIconNum;
+            frame.children[0].name = frame.name + ' / Image';
             userHiddenIconNum++;
         }
-        if (node.name.includes('bot-hidden-answer')) {
-            node.name = node.name.substring(0, node.name.lastIndexOf('-') + 1) + botHiddenAnswerNum;
+        if (frame.name.includes('Bot-hidden-answer')) {
+            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + botHiddenAnswerNum;
+            frame.children[0].name = frame.name + ' / Text';
             botHiddenAnswerNum++;
         }
-        if (node.name.includes('user-hidden-question')) {
-            node.name = node.name.substring(0, node.name.lastIndexOf('-') + 1) + userHiddenQuestionNum;
+        if (frame.name.includes('User-hidden-question')) {
+            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + userHiddenQuestionNum;
+            const scrollableBox = frame.children[0] as FrameNode;
+            scrollableBox.name = frame.name + ' / Scrollable-box';
+            scrollableBox.children[0].name = scrollableBox.name + ' / Text';
             userHiddenQuestionNum++;
         }
 
 
-        // nascondi il nodo
-        if (msg.targets.includes(node.name)) {
-            node.visible = false;
-            nodeType = node.name.substring(0, node.name.lastIndexOf('-'));
+        // Hiding the target frame
+        if (msg.targets.includes(frame.name)) {
+            frame.visible = false;
+            frameType = frame.name.substring(0, frame.name.lastIndexOf('-'));
 
-            if (nodeType.includes('bot-icon')) {
-                node.name = 'bot-hidden-icon-' + botHiddenIconNum;
+            if (frameType === 'Bot-icon') {
+                frame.name = 'Bot-hidden-icon-' + botHiddenIconNum;
+                frame.children[0].name = frame.name + ' / Image';
                 botHiddenIconNum++;
             }
-            if (nodeType.includes('user-icon')) {
-                node.name = 'user-hidden-icon-' + userHiddenIconNum;
+            if (frameType === 'User-icon') {
+                frame.name = 'User-hidden-icon-' + userHiddenIconNum;
+                frame.children[0].name = frame.name + ' / Image';
                 userHiddenIconNum++;
             }
-            if (nodeType.includes('bot-answer')) {
-                node.name = 'bot-hidden-answer-' + botHiddenAnswerNum;
+            if (frameType === 'Bot-answer') {
+                frame.name = 'Bot-hidden-answer-' + botHiddenAnswerNum;
+                frame.children[0].name = frame.name + ' / Text';
                 botHiddenAnswerNum++;
             }
-            if (nodeType.includes('user-question')) {
-                node.name = 'user-hidden-question-' + userHiddenQuestionNum;
+            if (frameType === 'User-question') {
+                frame.name = 'User-hidden-question-' + userHiddenQuestionNum;
+                const scrollableBox = frame.children[0] as FrameNode;
+                scrollableBox.name = frame.name + ' / Scrollable-box';
+                scrollableBox.children[0].name = scrollableBox.name + ' / Text';
                 userHiddenQuestionNum++;
             }
         }
 
 
-        // rinomina i nodi non nascosti
-        if (node.name.includes('bot-icon')) {
-            node.name = node.name.substring(0, node.name.lastIndexOf('-') + 1) + botIconNum;
+        // Renaming not hidden frames
+        if (frame.name.includes('Bot-icon')) {
+            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + botIconNum;
+            frame.children[0].name = frame.name + ' / Image';
             botIconNum++;
         }
-        if (node.name.includes('user-icon')) {
-            node.name = node.name.substring(0, node.name.lastIndexOf('-') + 1) + userIconNum;
+        if (frame.name.includes('User-icon')) {
+            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + userIconNum;
+            frame.children[0].name = frame.name + ' / Image';
             userIconNum++;
         }
-        if (node.name.includes('bot-answer')) {
-            node.name = node.name.substring(0, node.name.lastIndexOf('-') + 1) + botAnswerNum;
+        if (frame.name.includes('Bot-answer')) {
+            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + botAnswerNum;
+            frame.children[0].name = frame.name + ' / Text';
             botAnswerNum++;
         }
-        if (node.name.includes('user-question')) {
-            node.name = node.name.substring(0, node.name.lastIndexOf('-') + 1) + userQuestionNum;
+        if (frame.name.includes('User-question')) {
+            frame.name = frame.name.substring(0, frame.name.lastIndexOf('-') + 1) + userQuestionNum;
+            const scrollableBox = frame.children[0] as FrameNode;
+            scrollableBox.name = frame.name + ' / Scrollable-box';
+            scrollableBox.children[0].name = scrollableBox.name + ' / Text';
             userQuestionNum++;
         }
 
     });
     
 
-    // Send to WizardApp every selectable chatbox node and answer node 
+    // Send to WizardApp every selectable node
     sendBox.sendAll();
 }

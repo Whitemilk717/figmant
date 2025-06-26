@@ -96,34 +96,38 @@ export async function createQuestion(msg) {
 
 
     // Data
-    const iconComp = figma.currentPage.findOne(searchBox.nodeNamed('user-icon')) as ComponentNode;
-    const questionComp = figma.currentPage.findOne(searchBox.nodeNamed('user-question')) as ComponentNode;
-    const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('chat-box')) as FrameNode;
+    const iconComp = figma.currentPage.findOne(searchBox.nodeNamed('User-icon')) as ComponentNode;
+    const questionComp = figma.currentPage.findOne(searchBox.nodeNamed('User-question')) as ComponentNode;
+    const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('Chat-box')) as FrameNode;
     let nextNumber;
 
 
     // If it's the first message, add the icon
     if (msg.iconFlag) {
         const newIcon = iconComp.createInstance();
-        nextNumber = String(searchBox.nextCompNum(chatBox, 'user-icon'));
+        nextNumber = String(searchBox.nextCompNum(chatBox, 'User-icon'));
         newIcon.name = newIcon.name.concat('-', nextNumber);
         chatBox.appendChild(newIcon);
+
+        newIcon.children[0].name = newIcon.name + ' / Image';
     }
 
 
     // Add the new question instance
     const newQuestion = questionComp.createInstance();
-    nextNumber = String(searchBox.nextCompNum(chatBox, 'user-question'));
+    nextNumber = String(searchBox.nextCompNum(chatBox, 'User-question'));
     newQuestion.name = newQuestion.name.concat('-', nextNumber);
+
+    newQuestion.children[0].name = newQuestion.name + ' / Text';
 
 
     // Creation of the new text variable
     const collections = await figma.variables.getLocalVariableCollectionsAsync();
-    const figmantCollection = collections.find(collection => collection.name === 'figmant collection');
+    const figmantCollection = collections.find(collection => collection.name === 'Figmant collection');
     const modeId = figmantCollection.defaultModeId;
     nextNumber = await searchBox.nextVarNum();
     const newVar = figma.variables.createVariable(
-        'text-var-' + nextNumber,
+        'Text-var-' + nextNumber,
         figmantCollection,
         'STRING'
     );

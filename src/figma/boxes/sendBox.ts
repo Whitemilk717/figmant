@@ -21,7 +21,7 @@ export const sendBox = {
         let nodes = [];
         let answers = [];
         let infos;
-        const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('chat-box')) as FrameNode;
+        const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('Chat-box')) as FrameNode;
 
         chatBox.children.forEach(node => {
             if (node.name.includes('hidden')) return;

@@ -37,9 +37,9 @@ async function main() {
 
     
     // Figma font setup (if it has been customized)
-    const botAnswerComp = figma.currentPage.findOne(searchBox.nodeNamed('bot-answer')) as FrameNode;
+    const botAnswerComp = figma.currentPage.findOne(searchBox.nodeNamed('Bot-answer')) as FrameNode;
     const botFont = (botAnswerComp.children[0] as TextNode).fontName as FontName;
-    const userQuestionComp = figma.currentPage.findOne(searchBox.nodeNamed('user-question')) as FrameNode;    
+    const userQuestionComp = figma.currentPage.findOne(searchBox.nodeNamed('User-question')) as FrameNode;    
     const userFont = (
                         (userQuestionComp.children[0] as FrameNode)
                         .children[0] as TextNode
@@ -50,7 +50,7 @@ async function main() {
     await figma.loadFontAsync(userFont);
     
     
-    // chat-box check
+    // chat box creation
     createChatBox();
     
     

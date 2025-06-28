@@ -3,9 +3,8 @@
 import './style';
 import * as React from 'react';
 import { useState } from 'react';
-import { EditMode } from './mode-components/EditMode';
-import { HideMode } from './mode-components/HideMode';
-import { CreateMode } from './mode-components/CreateMode';
+import { ChatFunctionality } from './functionalities/chat/ChatFunctionality';
+import { VariantsFunctionality } from './functionalities/variants/VariantsFunctionality';
 
 
 /* WizardApp React component 
@@ -14,16 +13,33 @@ export const WizardApp = () => {
 
 
     // Data
-    const [nodes, setNodes] = useState([]);     // Selectable nodes present in the chatbox
-    const [answers, setAnswers] = useState([]); // Selectable answers present in the chatbox
-    const [mode, setMode] = useState('create'); // Mode selected by the wizard
-    
+    const [nodes, setNodes] = useState([]);                     // Selectable nodes present in the chatbox
+    const [frames, setFrames] = useState([]);                   // Selectable frames
+    const [answers, setAnswers] = useState([]);                 // Selectable answers present in the chatbox
+    const [compSets, setcompSets] = useState([]);               // Selectable component sets
+    const [functionality, setFunctionality] = useState('chat'); // Plugin functionality chosen by the wizard
 
 
-    // Saving available selectable nodes and answers 
+    // onmessage handlers
     onmessage = (msg) => {
-        setNodes(msg.data.pluginMessage.nodes);
-        setAnswers(msg.data.pluginMessage.answers);
+        const msgType = msg.data.pluginMessage.type;
+
+        // Saving available selectable nodes and answers received by code.ts
+        if (msgType === 'chat') {
+            setNodes(msg.data.pluginMessage.nodes);
+            setAnswers(msg.data.pluginMessage.answers);
+        }
+
+        // Saving available component sets received by code.ts
+        else if (msgType === 'variants') {
+            setcompSets(msg.data.pluginMessage.compSets);
+        }
+
+        // Saving available frames received by code.ts
+        else if (msgType === 'frames') {
+            setFrames(msg.data.pluginMessage.frames);
+        }
+
     }
 
 
@@ -40,39 +56,35 @@ export const WizardApp = () => {
     // JSX 
     return (
         <div>
-
             <p>Here are your personal notes:</p>
             <textarea className='notes-box' rows={ 4 } cols={ 43 }></textarea>
             <hr />
-            
-            <p>Select a mode:</p>
+
+
+            <p>Select a functionality</p>
             <div className='centered-box'>
-                <select className='single-select' onChange={ (e) => setMode(e.target.value) } >
-                    <option value='create'>Create new answer</option>
-                    <option value='edit'>Edit answer</option>
-                    <option value='hide'>Hide messages and icons</option>
+                <select className='single-select' onChange={ (e) => setFunctionality(e.target.value) }>
+                    <option value='chat'>Chat manipulation</option>
+                    <option value='variants'>Variants manipulation</option>
                 </select>
             </div>
             <hr />
 
-            { mode === 'create' &&  (
-                <CreateMode />
+
+            { functionality === 'chat' && (
+                <ChatFunctionality answers={ answers } nodes={ nodes } />
             )}
 
-            { mode === 'edit' && (
-                <EditMode answers={ answers } />
+
+            { functionality === 'variants' && (
+                <VariantsFunctionality compSets={ compSets } frames={ frames }/>
             )}
 
-            { mode === 'hide' && (
-                <HideMode nodes={ nodes } />
-            )}
-            <hr />
 
             <p>End WoZ simulation:</p>
             <div className='centered-box'>
                 <button className='red-button' onClick={ () => closePlugin() }>End simulation</button>
             </div>
-
         </div>
     );
 };

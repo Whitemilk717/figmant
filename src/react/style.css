@@ -32,7 +32,6 @@
 }
 
 
-
 /* Red button
 ------------------------------------------------------------ */
 .red-button {
@@ -63,7 +62,6 @@
     border-radius: 10px;
     background-color: #DBF7E8;
 }
-
 
 
 /* Green buttons
@@ -99,4 +97,13 @@
 .notes-box {
     border-radius: 10px;
     background-color: #fffacd;
+}
+
+
+/* Inline box
+------------------------------------------------------------ */
+.inline-box {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
 }

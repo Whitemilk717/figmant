@@ -41,5 +41,5 @@ export async function createAnswer(msg) {
 
 
     // Send to WizardApp every selectable chatbox node and answer node 
-    sendBox.sendAll();
+    sendBox.chatBoxNodes();
 }

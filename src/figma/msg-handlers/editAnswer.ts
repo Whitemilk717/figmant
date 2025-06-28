@@ -22,5 +22,5 @@ export function editAnswer(msg): void {
 
 
     // Send to WizardApp every selectable chatbox node and answer node 
-    sendBox.sendAll();
+    sendBox.chatBoxNodes();
 }

@@ -8,7 +8,7 @@ import { searchBox } from "./searchBox";
 export const sendBox = {
 
 
-    // Preview length and the corresponding setter
+    // Preview length of chat box nodes and the corresponding setter
     previewLength: 0,
 
     setPreviewLength: function (previewLength: number): void {
@@ -16,8 +16,8 @@ export const sendBox = {
     },
 
 
-    // Function to send every selectable node and answer to the WizardApp
-    sendAll: function () {
+    // Function to send every selectable chat box node and answer to the WizardApp
+    chatBoxNodes: function () {
         let nodes = [];
         let answers = [];
         let infos;
@@ -56,8 +56,51 @@ export const sendBox = {
         });
 
         figma.ui.postMessage({
+            type: 'chat',
             nodes: nodes,
             answers: answers
         });
+    },
+
+
+    // Function to send every selectable component set to the WizardApp
+    compSets: function () {
+        const nodes = figma.currentPage.findAll(node => node.type === 'COMPONENT_SET') as ComponentSetNode[];   // A component set contains the variants of a component
+        const compSets = [];                                                                                    // Array containing every component set with its infos
+    
+        nodes.forEach(node => {
+            const set = {
+                name: node.name,
+                properties: []
+            }
+            
+            for (const [name, values] of Object.entries(node.componentPropertyDefinitions)) {
+                set.properties.push({ name: name, values: values.variantOptions });
+            }
+            
+            compSets.push(set);
+        })
+    
+        figma.ui.postMessage({
+            type: 'variants',
+            compSets: compSets
+        });
+    },
+
+
+    // Function to send every selectable frame to the WizardApp
+    frames: function () {
+        const nodes = figma.currentPage.findAll(node => node.type === 'FRAME') as FrameNode[];   // A component set contains the variants of a component
+        const frames = [];
+
+        nodes.forEach(node =>
+            frames.push(node.name)
+        );
+        
+        figma.ui.postMessage({
+            type: 'frames',
+            frames: frames
+        });
+
     }
 }

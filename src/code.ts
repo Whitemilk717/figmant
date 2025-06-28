@@ -16,8 +16,8 @@ async function main() {
 
 
     // Data
-    const uiWidth = 360;
-    const uiHeight = 780;
+    const uiWidth = 370;
+    const uiHeight = 700;
     const previewLength = 30;
     
     
@@ -56,7 +56,13 @@ async function main() {
     
     // Send to WizardApp every selectable chatbox node and answer node
     sendBox.setPreviewLength(previewLength);
-    sendBox.sendAll();
+    sendBox.chatBoxNodes();
+
+    
+    /* Send to WizardApp every selectable component set and frame
+    ---------------------------------------------------------------------------------------------------- */
+    sendBox.compSets();
+    sendBox.frames();
     
     
     // Handler for messages received from React components

@@ -113,5 +113,5 @@ export async function hideNodes(msg) {
     
 
     // Send to WizardApp every selectable node
-    sendBox.sendAll();
+    sendBox.chatBoxNodes();
 }

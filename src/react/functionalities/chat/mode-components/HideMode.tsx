@@ -1,6 +1,6 @@
 /* Imports
 ------------------------------------------------------------ */
-import '../style';
+import '../../../style.css';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 

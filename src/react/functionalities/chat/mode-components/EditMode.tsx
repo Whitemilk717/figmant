@@ -1,6 +1,6 @@
 /* Imports
 ------------------------------------------------------------ */
-import '../style';
+import '../../../style.css';
 import * as React from 'react';
 import { useRef, useState, useEffect } from 'react';
 
@@ -50,24 +50,27 @@ export const EditMode = (props) => {
         <div>
             <p>Select the answer:</p>
 
-                { props.answers.length === 0 &&  (
+                { props.answers.length === 0 && (
                     <div className='centered-box'>
                         <p style={{ textAlign: 'center' }}>There are no selectable answers</p>
                     </div>
                 )}
 
                 { props.answers.length != 0 && (
-                    <div className='centered-box'>
-                        <select className='single-select' onChange={ (e) => setTargetAnswer(e.target.value) }>
-                            { props.answers.map(node => {
-                                return <option key={ node.name } value={ node.name }>
-                                    {(node.fullText
-                                        ? node.name + ' (' + node.preview + ')'
-                                        : node.name + ' (' + node.preview + '...)'
-                                    )}
-                                </option>
-                            }) }
-                        </select>
+                    <div>
+                        <div className='centered-box'>
+                            <select className='single-select' onChange={ (e) => setTargetAnswer(e.target.value) }>
+                                { props.answers.map(node => {
+                                    return <option key={ node.name } value={ node.name }>
+                                        {(node.fullText
+                                            ? node.name + ' (' + node.preview + ')'
+                                            : node.name + ' (' + node.preview + '...)'
+                                        )}
+                                    </option>
+                                }) }
+                            </select>
+                        </div>
+                        <hr />
 
                         <p>Pre-made answers:</p>
                         <div className='premade-answers-box'>
@@ -85,7 +88,7 @@ export const EditMode = (props) => {
                             </div>
                         </form>
                     </div>
-                ) }
+                )}
         </div>
     )
 

@@ -4,9 +4,9 @@ export async function createComponentsFrame() {
 
     
     // Creation and configuration of the base frame
-    let frame = figma.currentPage.findOne(node => node.name === 'Components-frame');
+    let frame = figma.currentPage.findOne(node => node.name === 'Figmant-components-frame');
     if (frame) {
-        figma.notify("'Components-frame' already exists");
+        figma.notify("'Figmant-components-frame' already exists");
         return;
     } 
     frame = figma.createFrame();
@@ -48,7 +48,7 @@ export async function createComponentsFrame() {
 /* Function to set the component frame
 ------------------------------------------------------------ */
 function setComponentsFrame(frame: FrameNode) {
-    frame.name = 'Components-frame';
+    frame.name = 'Figmant-components-frame';
 
     frame.x = 0;
     frame.y = 0;

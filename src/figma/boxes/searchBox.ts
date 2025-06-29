@@ -5,13 +5,7 @@ export const searchBox = {
 
     // chatbox findOne argument functions
     nodeNamed: function (name: string) {
-        return function (node: SceneNode): boolean {
-            return (
-                node.name === name
-                ? true
-                : false
-            );
-        }
+        return figma.currentPage.findOne(n => n.name === name);
     },
 
 
@@ -48,24 +42,32 @@ export const searchBox = {
 
     // function to search a named frame node
     frameNamed: function (name: string) {
-        return function (node: SceneNode) {
-            return (
-                node.type === 'FRAME' && node.name === name
-                ? true
-                : false
-            );
-        }
+        return figma.currentPage.findOne(n => 
+            n.type === 'FRAME' &&
+            n.name === name
+        )
     },
 
 
     // function to search a named component set node
     setNamed: function (name: string) {
-        return function (node: SceneNode) {
-            return (
-                node.type === 'COMPONENT_SET' && node.name === name
-                ? true
-                : false
-            );
-        }
+        return figma.currentPage.findOne(n => 
+            n.type === 'COMPONENT_SET' &&
+            n.name === name
+        )
+    },
+
+
+    // function to search an original available variant (child of the right component set)
+    variantNamed: async function (variantName, setName) {
+        const originalVariant = figma.currentPage.findOne(n =>
+            n.name === variantName &&
+            n.parent &&
+            n.parent.name === setName
+            ? true
+            : false
+        );
+
+        return originalVariant;
     }
 }

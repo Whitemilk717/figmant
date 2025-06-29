@@ -10,9 +10,9 @@ export async function createAnswer(msg) {
 
 
     // Data
-    const iconComp = figma.currentPage.findOne(searchBox.nodeNamed('Bot-icon')) as ComponentNode;
-    const answerComp = figma.currentPage.findOne(searchBox.nodeNamed('Bot-answer')) as ComponentNode;
-    const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('Chat-box')) as FrameNode;
+    const iconComp = searchBox.nodeNamed('Bot-icon') as ComponentNode;
+    const answerComp = searchBox.nodeNamed('Bot-answer') as ComponentNode;
+    const chatBox = searchBox.nodeNamed('Figmant-chat-box') as FrameNode;
     let nextNumber;
 
 

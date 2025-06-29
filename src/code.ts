@@ -6,6 +6,7 @@ import { hideNodes } from './figma/msg-handlers/chat/hideNodes';
 import { editAnswer } from './figma/msg-handlers/chat/editAnswer';
 import { createChatBox } from './figma/init-functions/createChatBox';
 import { createAnswer } from './figma/msg-handlers/chat/createAnswer';
+import { editVariant } from './figma/msg-handlers/variants/editVariant';
 import { createQuestion } from './figma/msg-handlers/chat/createQuestion';
 import { createVariant } from './figma/msg-handlers/variants/createVariant';
 import { createComponentsFrame } from './figma/init-functions/createComponentsFrame';
@@ -38,9 +39,9 @@ async function main() {
 
     
     // Figma font setup (if it has been customized)
-    const botAnswerComp = figma.currentPage.findOne(searchBox.nodeNamed('Bot-answer')) as FrameNode;
+    const botAnswerComp = searchBox.nodeNamed('Bot-answer') as FrameNode;
     const botFont = (botAnswerComp.children[0] as TextNode).fontName as FontName;
-    const userQuestionComp = figma.currentPage.findOne(searchBox.nodeNamed('User-question')) as FrameNode;    
+    const userQuestionComp = searchBox.nodeNamed('User-question') as FrameNode;    
     const userFont = (
                         (userQuestionComp.children[0] as FrameNode)
                         .children[0] as TextNode
@@ -60,10 +61,11 @@ async function main() {
     sendBox.chatBoxNodes();
 
     
-    /* Send to WizardApp every selectable component set and frame
+    /* Send to WizardApp every selectable component set, frame and created variant
     ---------------------------------------------------------------------------------------------------- */
     sendBox.compSets();
     sendBox.frames();
+    sendBox.createdVariants();
     
     
     // Handler for messages received from React components
@@ -87,6 +89,10 @@ async function main() {
 
         else if (msg.type === 'createVariant') {
             createVariant(msg);
+        }
+
+        else if (msg.type === 'editVariant') {
+            editVariant(msg);
         }
     
         else if (msg.type === 'closePlugin') {

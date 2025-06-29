@@ -4,16 +4,16 @@ export function createChatBox() {
 
 
     // Checking the existence of the chat box
-    let chatBox = figma.currentPage.findOne(node => node.name === 'Chat-box');
+    let chatBox = figma.currentPage.findOne(node => node.name === 'Figmant-chat-box');
     if (chatBox) {
-        figma.notify("'Chat-box' already exists");
+        figma.notify("'Figmant-chat-box' already exists");
         return;
     }
     
     
     // Configuration of the chat box
     chatBox = figma.createFrame();
-    chatBox.name = 'Chat-box';
+    chatBox.name = 'Figmant-chat-box';
 
     chatBox.x = 0;
     chatBox.y = 350;

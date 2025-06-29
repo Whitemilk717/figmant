@@ -96,9 +96,9 @@ export async function createQuestion(msg) {
 
 
     // Data
-    const iconComp = figma.currentPage.findOne(searchBox.nodeNamed('User-icon')) as ComponentNode;
-    const questionComp = figma.currentPage.findOne(searchBox.nodeNamed('User-question')) as ComponentNode;
-    const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('Chat-box')) as FrameNode;
+    const iconComp = searchBox.nodeNamed('User-icon') as ComponentNode;
+    const questionComp = searchBox.nodeNamed('User-question') as ComponentNode;
+    const chatBox = searchBox.nodeNamed('Figmant-chat-box') as FrameNode;
     let nextNumber;
 
 

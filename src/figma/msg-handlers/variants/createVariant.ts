@@ -11,8 +11,7 @@ export async function createVariant(msg) {
 
     // Data
     let variantName = '';
-    const set = figma.currentPage.findOne(searchBox.setNamed(msg.set)) as ComponentSetNode;
-    const frame = figma.currentPage.findOne(searchBox.frameNamed(msg.frame)) as FrameNode;
+    const frame = searchBox.frameNamed(msg.frame) as FrameNode;
     
     
     // Configuration of the variant name
@@ -23,7 +22,18 @@ export async function createVariant(msg) {
 
 
     // Variant creation
-    const variant = set.children.find(searchBox.nodeNamed(variantName)) as ComponentNode;
-    const newVariant = variant.createInstance();
+    const originalVariant = await searchBox.variantNamed(variantName, msg.set) as ComponentNode;
+    if (!originalVariant) {
+        figma.notify('This combination of properties is not supported');
+        return;
+    }
+
+    const newVariant = originalVariant.createInstance();
+    newVariant.name = variantName;
+
     frame.appendChild(newVariant);
+    
+
+    // Send every created variants in the current page to WizardApp
+    sendBox.createdVariants();
 }

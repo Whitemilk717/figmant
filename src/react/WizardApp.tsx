@@ -17,6 +17,7 @@ export const WizardApp = () => {
     const [frames, setFrames] = useState([]);                   // Selectable frames
     const [answers, setAnswers] = useState([]);                 // Selectable answers present in the chatbox
     const [compSets, setcompSets] = useState([]);               // Selectable component sets
+    const [variants, setVariants] = useState([]);               // Selectable created variants
     const [functionality, setFunctionality] = useState('chat'); // Plugin functionality chosen by the wizard
 
 
@@ -31,13 +32,18 @@ export const WizardApp = () => {
         }
 
         // Saving available component sets received by code.ts
-        else if (msgType === 'variants') {
+        else if (msgType === 'componentSets') {
             setcompSets(msg.data.pluginMessage.compSets);
         }
 
         // Saving available frames received by code.ts
         else if (msgType === 'frames') {
             setFrames(msg.data.pluginMessage.frames);
+        }
+
+        // Saving available created variants received by code.ts
+        else if (msgType === 'createdVariants') {
+            setVariants(msg.data.pluginMessage.variants);
         }
 
     }
@@ -77,7 +83,7 @@ export const WizardApp = () => {
 
 
             { functionality === 'variants' && (
-                <VariantsFunctionality compSets={ compSets } frames={ frames }/>
+                <VariantsFunctionality compSets={ compSets } frames={ frames } variants={ variants } />
             )}
 
 

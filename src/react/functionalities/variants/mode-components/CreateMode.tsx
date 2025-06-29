@@ -61,13 +61,15 @@ export const CreateMode = (props) => {
             )}
 
             { props.frames.length != 0 && (
-                <select className='single-select' onChange={ (e) => setTargetFrame(e.target.value) }>
-                    { props.frames.map(frame => {
-                        return <option key={ frame } value={ frame }>
-                            { frame }
-                        </option>
-                    }) }
-                </select>
+                <div className='centered-box'>
+                    <select className='single-select' onChange={ (e) => setTargetFrame(e.target.value) }>
+                        { props.frames.map(frame => {
+                            return <option key={ frame } value={ frame }>
+                                { frame }
+                            </option>
+                        }) }
+                    </select>
+                </div>
             )}
             <hr />
 

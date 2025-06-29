@@ -21,7 +21,7 @@ export const sendBox = {
         let nodes = [];
         let answers = [];
         let infos;
-        const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('Chat-box')) as FrameNode;
+        const chatBox = searchBox.nodeNamed('Figmant-chat-box') as FrameNode;
 
         chatBox.children.forEach(node => {
             if (node.name.includes('hidden')) return;
@@ -82,7 +82,7 @@ export const sendBox = {
         })
     
         figma.ui.postMessage({
-            type: 'variants',
+            type: 'componentSets',
             compSets: compSets
         });
     },
@@ -102,5 +102,42 @@ export const sendBox = {
             frames: frames
         });
 
-    }
+    },
+
+
+    // Function to send every selectable created variant to the WizardApp
+    createdVariants: async function () {
+        const instances = figma.currentPage.findAll(n => n.type === 'INSTANCE') as InstanceNode[];
+        const variants = [];
+        
+        for(const instance of instances) {
+            const frame = instance.parent.name;
+            const mainComponent = await instance.getMainComponentAsync();
+
+            if (
+                frame &&
+                mainComponent &&
+                mainComponent.parent &&
+                mainComponent.parent.type === 'COMPONENT_SET'
+            ) {
+                const variant = { 
+                    set: mainComponent.parent.name,
+                    frame: frame,
+                    variant: instance.name,
+                    properties: []
+                };
+
+                for (const [name, values] of Object.entries(mainComponent.parent.componentPropertyDefinitions)) {
+                    variant.properties.push({ name: name, values: values.variantOptions });
+                }
+
+                variants.push(variant);
+            }
+        };
+    
+        figma.ui.postMessage({
+            type: 'createdVariants',
+            variants: variants
+        });
+    },
 }

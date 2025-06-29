@@ -1,7 +1,7 @@
 /* Imports
 ------------------------------------------------------------ */
-import { sendBox } from '../boxes/sendBox';
-import { searchBox } from '../boxes/searchBox';
+import { sendBox } from '../../boxes/sendBox'; 
+import { searchBox } from '../../boxes/searchBox';
 
 
 /* Function to create an answer node
@@ -13,7 +13,6 @@ export async function createAnswer(msg) {
     const iconComp = figma.currentPage.findOne(searchBox.nodeNamed('Bot-icon')) as ComponentNode;
     const answerComp = figma.currentPage.findOne(searchBox.nodeNamed('Bot-answer')) as ComponentNode;
     const chatBox = figma.currentPage.findOne(searchBox.nodeNamed('Chat-box')) as FrameNode;
-    const lastMsg = chatBox.children[chatBox.children.length - 1];
     let nextNumber;
 
 

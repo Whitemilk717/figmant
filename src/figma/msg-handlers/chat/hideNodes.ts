@@ -1,7 +1,7 @@
 /* Imports
 ------------------------------------------------------------ */
-import { sendBox } from '../boxes/sendBox';
-import { searchBox } from '../boxes/searchBox';
+import { sendBox } from "../../boxes/sendBox";
+import { searchBox } from "../../boxes/searchBox";
 
 
 /* Function to hide a message

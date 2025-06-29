@@ -18,24 +18,18 @@ export const CreateMode = (props) => {
 
     // Function to send the creation message
     function sendMsg(): void {
-        // parent.postMessage({
-        //     pluginMessage: {
-                // type: 'createQuestion',
-                // iconFlag : questionIconFlag,
-        //     }
-        // }, '*');
-        console.log('Name       :   ', targetSet);
-        console.log('Properties :');
-        targetProps.forEach(p => {
-            console.log('   Name    :   ', p.name);
-            console.log('   Value   :   ', p.value);
-        })
-        console.log('Frame      :   ', targetFrame);
-        console.log('--------------------------------------------------')
+        parent.postMessage({
+            pluginMessage: {
+                type: 'createVariant',
+                set: targetSet,
+                props: targetProps,
+                frame: targetFrame
+            }
+        }, '*');
     }
 
 
-    // Whenever the selectable component sets change, if possible and if nothing has been selected yet, the first one is selected
+    // Whenever the selectable component sets change, if possible and if nothing has been selected yet, the first one is selected (default value)
     useEffect(() => {
         if (props.compSets.length != 0 && targetSet.length == 0) {
             setTargetSet(props.compSets[0].name);
@@ -108,12 +102,14 @@ export const CreateMode = (props) => {
                                 ?.properties.map(property => {
                                     return <div key={ property.name } className='inline-box'>
                                         <p>{ property.name }</p>
+
                                         <select 
                                             className='single-select'
                                             onChange={ (e) => {
                                                 setTargetProps(old => {
-                                                    const help = targetProps.filter(p => p.name != property.name);
-                                                    return [...help, { name: property.name, value: e.target.value }] 
+                                                    const help = old;
+                                                    help.find(p => p.name === property.name).value = e.target.value;
+                                                    return help;
                                                 });
                                             }}
                                         >

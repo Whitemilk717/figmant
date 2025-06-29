@@ -1,7 +1,7 @@
 /* Imports
 ------------------------------------------------------------ */
-import { sendBox } from '../boxes/sendBox';
-import { searchBox } from '../boxes/searchBox';
+import { sendBox } from "../../boxes/sendBox";
+import { searchBox } from "../../boxes/searchBox";
 
 
 /* keyCodes map
@@ -124,6 +124,7 @@ export async function createQuestion(msg) {
     // Creation of the new text variable
     const collections = await figma.variables.getLocalVariableCollectionsAsync();
     const figmantCollection = collections.find(collection => collection.name === 'Figmant collection');
+
     const modeId = figmantCollection.defaultModeId;
     nextNumber = await searchBox.nextVarNum();
     const newVar = figma.variables.createVariable(

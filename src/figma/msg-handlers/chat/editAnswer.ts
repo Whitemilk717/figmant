@@ -1,6 +1,7 @@
 /* Imports
 ------------------------------------------------------------ */
-import { sendBox } from '../boxes/sendBox';
+import { sendBox } from "../../boxes/sendBox";
+import { searchBox } from "../../boxes/searchBox";
 
 
 /* Function to edit a wizard answer

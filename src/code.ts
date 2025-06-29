@@ -2,11 +2,12 @@
 ------------------------------------------------------------ */
 import { sendBox } from './figma/boxes/sendBox';
 import { searchBox } from './figma/boxes/searchBox';
-import { hideNodes } from './figma/msg-handlers/hideNodes';
-import { editAnswer } from './figma/msg-handlers/editAnswer';
-import { createAnswer } from './figma/msg-handlers/createAnswer';
-import { createQuestion } from './figma/msg-handlers/createQuestion';
+import { hideNodes } from './figma/msg-handlers/chat/hideNodes';
+import { editAnswer } from './figma/msg-handlers/chat/editAnswer';
 import { createChatBox } from './figma/init-functions/createChatBox';
+import { createAnswer } from './figma/msg-handlers/chat/createAnswer';
+import { createQuestion } from './figma/msg-handlers/chat/createQuestion';
+import { createVariant } from './figma/msg-handlers/variants/createVariant';
 import { createComponentsFrame } from './figma/init-functions/createComponentsFrame';
 
 
@@ -82,6 +83,10 @@ async function main() {
     
         else if (msg.type === 'hideNodes') {
             hideNodes(msg);
+        }
+
+        else if (msg.type === 'createVariant') {
+            createVariant(msg);
         }
     
         else if (msg.type === 'closePlugin') {

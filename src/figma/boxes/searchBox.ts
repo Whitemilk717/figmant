@@ -3,37 +3,14 @@
 export const searchBox = {
 
 
-    // findOne argument functions
+    // chatbox findOne argument functions
     nodeNamed: function (name: string) {
-
-        if (name === 'Bot-icon') {
-            return function (node: SceneNode): boolean {
-                return (node.name === 'Bot-icon'? true:false);
-            }
-        }
-
-        if (name === 'Bot-answer') {
-            return function (node: SceneNode): boolean {
-                return (node.name === 'Bot-answer'? true:false);
-            }
-        }
-
-        if (name === 'User-icon') {
-            return function (node: SceneNode): boolean {
-                return (node.name === 'User-icon'? true:false);
-            }
-        }
-
-        if (name === 'User-question') {
-            return function (node: SceneNode): boolean {
-                return (node.name === 'User-question'? true:false);
-            }
-        }
-
-        if (name === 'Chat-box') {
-            return function (node: SceneNode): boolean {
-                return (node.name === 'Chat-box'? true:false);
-            }
+        return function (node: SceneNode): boolean {
+            return (
+                node.name === name
+                ? true
+                : false
+            );
         }
     },
 
@@ -67,4 +44,28 @@ export const searchBox = {
 
         return targetNumber;
     },
+
+
+    // function to search a named frame node
+    frameNamed: function (name: string) {
+        return function (node: SceneNode) {
+            return (
+                node.type === 'FRAME' && node.name === name
+                ? true
+                : false
+            );
+        }
+    },
+
+
+    // function to search a named component set node
+    setNamed: function (name: string) {
+        return function (node: SceneNode) {
+            return (
+                node.type === 'COMPONENT_SET' && node.name === name
+                ? true
+                : false
+            );
+        }
+    }
 }

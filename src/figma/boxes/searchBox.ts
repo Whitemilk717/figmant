@@ -59,7 +59,7 @@ export const searchBox = {
 
 
     // function to search an original available variant (child of the right component set)
-    variantNamed: async function (variantName, setName) {
+    variantNamed: function (variantName, setName) {
         const originalVariant = figma.currentPage.findOne(n =>
             n.name === variantName &&
             n.parent &&
@@ -73,13 +73,16 @@ export const searchBox = {
 
 
     // Function to search for a new variant number
-    nextVariantNum: async function (name) {
+    nextVariantNum: function (name) {
         let newNum = 1;
 
         const instances = figma.currentPage.findAll(n => n.type === 'INSTANCE') as InstanceNode[];
         
         instances.forEach(instance => {
-            if (instance.name.includes(name)) {
+            if (
+                instance.name.includes(name) &&
+                !instance.name.includes('-hidden-')
+            ) {
                 const indx = instance.name.indexOf('-');
                 let num = Number(instance.name.slice(0, indx));
                 if (num == newNum) newNum++;
@@ -88,4 +91,35 @@ export const searchBox = {
 
         return (String(newNum) + '-');
     },
+
+
+    // Function to search every variant with the same properties
+    homonymousVariants: async function (cleanName) {
+        
+        const nodes = figma.currentPage.findAll(
+            n => n.type === 'INSTANCE' &&
+            n.name.includes(cleanName)                  // Same property values
+        ) as InstanceNode[];
+
+        // const group = [];
+        // for (const canditate of canditates) {
+        //     const componentSet = (await canditate.getMainComponentAsync()).parent.name;
+
+        //     if (componentSet === set) group.push(canditate);                // Same component set
+        // }
+        
+        return nodes;
+    },
+
+
+    // Function to search every variant (not hidden) that need to be reordered (the number in its name)
+    variantsToReorder: function (cleanName) {
+        const group = figma.currentPage.findAll(
+            n => n.name.includes(cleanName) && 
+            n.type === 'INSTANCE' && 
+            !n.name.includes('-hidden-')
+        );
+
+        return group;
+    }
 }

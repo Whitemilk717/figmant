@@ -115,6 +115,7 @@ export const sendBox = {
             const mainComponent = await instance.getMainComponentAsync();
 
             if (
+                !instance.name.includes('-hidden-') &&
                 frame &&
                 mainComponent &&
                 mainComponent.parent &&

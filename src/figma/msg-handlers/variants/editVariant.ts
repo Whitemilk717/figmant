@@ -4,7 +4,7 @@ import { sendBox } from '../../boxes/sendBox';
 import { searchBox } from '../../boxes/searchBox';
 
 
-/* Function to create an answer node
+/* Function to edit a variant
 ------------------------------------------------------------ */
 export async function editVariant(msg) {
 
@@ -35,13 +35,13 @@ export async function editVariant(msg) {
 
     // Reordering of the variants belonging to the old and modified group
     let indx = msg.variant.indexOf('-');
-    const oldCleanName = msg.variant.slice(indx+1);                                                                     // Old variant name without without numbering
-    const oldVariantsGroup = figma.currentPage.findAll(n => n.name.includes(oldCleanName) && n.type === 'INSTANCE');
+    const oldCleanName = msg.variant.slice(indx+1);                     // Old variant name without without numbering
+    const oldVariantsGroup = searchBox.variantsToReorder(oldCleanName);
     reorder(oldVariantsGroup);
 
     indx = newVariantName.indexOf('-');
-    const newCleanName = newVariantName.slice(indx+1);                                                                  // New variant name without without numbering
-    const editedVariantsGroup = figma.currentPage.findAll(n => n.name.includes(newCleanName) && n.type === 'INSTANCE');
+    const newCleanName = newVariantName.slice(indx+1);                  // New variant name without without numbering
+    const editedVariantsGroup = searchBox.variantsToReorder(newCleanName);
     reorder(editedVariantsGroup);
 
 

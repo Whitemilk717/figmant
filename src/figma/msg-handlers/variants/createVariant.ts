@@ -4,7 +4,7 @@ import { sendBox } from '../../boxes/sendBox';
 import { searchBox } from '../../boxes/searchBox';
 
 
-/* Function to create an answer node
+/* Function to create a variant
 ------------------------------------------------------------ */
 export async function createVariant(msg) {
 

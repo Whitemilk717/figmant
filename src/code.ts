@@ -7,6 +7,7 @@ import { editAnswer } from './figma/msg-handlers/chat/editAnswer';
 import { createChatBox } from './figma/init-functions/createChatBox';
 import { createAnswer } from './figma/msg-handlers/chat/createAnswer';
 import { editVariant } from './figma/msg-handlers/variants/editVariant';
+import { hideVariants } from './figma/msg-handlers/variants/hideVariants';
 import { createQuestion } from './figma/msg-handlers/chat/createQuestion';
 import { createVariant } from './figma/msg-handlers/variants/createVariant';
 import { createComponentsFrame } from './figma/init-functions/createComponentsFrame';
@@ -93,6 +94,10 @@ async function main() {
 
         else if (msg.type === 'editVariant') {
             editVariant(msg);
+        }
+
+        else if (msg.type === 'hideVariants') {
+            hideVariants(msg);
         }
     
         else if (msg.type === 'closePlugin') {

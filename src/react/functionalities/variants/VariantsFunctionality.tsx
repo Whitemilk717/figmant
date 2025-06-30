@@ -4,6 +4,7 @@ import '../../style.css';
 import * as React from 'react';
 import { useState } from 'react';
 import { EditMode } from './mode-components/EditMode';
+import { HideMode } from './mode-components/HideMode';
 import { CreateMode } from './mode-components/CreateMode';
 
 
@@ -25,7 +26,7 @@ export const VariantsFunctionality = (props) => {
                 <select className='single-select' onChange={ (e) => setMode(e.target.value) } >
                     <option value='create'>Create new variant</option>
                     <option value='edit'>Edit variant</option>
-                    <option value='hide'>Hide variant</option>
+                    <option value='hide'>Hide variants</option>
                 </select>
             </div>
             <hr />
@@ -39,8 +40,7 @@ export const VariantsFunctionality = (props) => {
             )}
 
             { mode === 'hide' && (
-                // <HideMode />
-                <p>Todo</p>
+                <HideMode variants={ props.variants } />
             )}
             <hr />
 

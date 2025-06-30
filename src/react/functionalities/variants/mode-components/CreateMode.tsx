@@ -14,6 +14,7 @@ export const CreateMode = (props) => {
     const [targetSet, setTargetSet] = useState('');                     // Component set selected by the wizard
     const [targetProps, setTargetProps] = useState([]);                 // Selected properties values of the targetSet
     const [targetFrame, setTargetFrame] = useState(props.frames[0]);    // Selected frame where the variant will be inserted
+    // let oldTargetSet;
     
 
     // Function to send the creation message
@@ -31,7 +32,7 @@ export const CreateMode = (props) => {
 
     // Whenever the selectable component sets change, if possible and if nothing has been selected yet, the first one is selected (default value)
     useEffect(() => {
-        if (props.compSets.length != 0 && targetSet.length == 0) {
+        if (props.compSets.length != 0) {
             setTargetSet(props.compSets[0].name);
         }
     }, [props.compSets]);
@@ -41,14 +42,14 @@ export const CreateMode = (props) => {
     useEffect(() => {
         if (targetSet.length == 0) return;
 
-        setTargetProps([]);
+        let newTargetProps = [];
         props.compSets
             .find(set => set.name === targetSet)
             .properties.forEach(p => {
-                setTargetProps(oldProps => {
-                    return [...oldProps, { name: p.name, value: p.values[0] }]
-                });
-            })
+                newTargetProps = [...newTargetProps, { name: p.name, value: p.values[0] }];
+            });
+        
+        setTargetProps(newTargetProps);
     }, [targetSet]);
 
 
@@ -85,7 +86,8 @@ export const CreateMode = (props) => {
             { props.compSets.length != 0 && (
                 <div>
                     <div className='centered-box'>
-                        <select className='single-select' onChange={ (e) => setTargetSet(e.target.value) }>
+                        <select 
+                            className='single-select' onChange={ (e) => setTargetSet(e.target.value) }>
                             { props.compSets.map(set => {
                                 return <option key={ set.name } value={ set.name }>
                                     { set.name }
@@ -109,7 +111,7 @@ export const CreateMode = (props) => {
                                             className='single-select'
                                             onChange={ (e) => {
                                                 setTargetProps(old => {
-                                                    const help = old;
+                                                    const help = JSON.parse(JSON.stringify(old));                       // Deep copy
                                                     help.find(p => p.name === property.name).value = e.target.value;
                                                     return help;
                                                 });

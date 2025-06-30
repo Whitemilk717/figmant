@@ -15,6 +15,7 @@ export const EditMode = (props) => {
     const [targetFrame, setTargetFrame] = useState('');     // Name of the frame where the variant is located
     const [targetProps, setTargetProps] = useState([]);     // Selected properties values of the targetVariant
     const [targetVariant, setTargetVariant] = useState(''); // Name of the selected variant
+    
 
     // Function to send the creation message
     function sendMsg(): void {
@@ -30,9 +31,9 @@ export const EditMode = (props) => {
     }
 
 
-    // Whenever the selectable variants change, if possible and if nothing has been selected yet, the first one is selected (default value)
+    // Whenever the selectable variants change, if possible, the first one is selected (default value)
     useEffect(() => {
-        if (props.variants.length != 0 && targetVariant.length == 0) {
+        if (props.variants.length != 0) {
             setTargetSet(props.variants[0].set);
             setTargetFrame(props.variants[0].frame);
             setTargetVariant(props.variants[0].variant);
@@ -42,11 +43,12 @@ export const EditMode = (props) => {
 
     // Whenever a variant is selected, targetProps are setted by default
     useEffect(() => {
+
         if (targetVariant.length == 0) return;
 
         setTargetProps([]);
         props.variants
-            .find(v => v.set === targetSet )
+            .find(v => v.variant === targetVariant )
             .properties.forEach(p => {
                 setTargetProps(oldProps => {
                     return [...oldProps, { name: p.name, value: p.values[0] }]
@@ -69,7 +71,8 @@ export const EditMode = (props) => {
                 <div>
                     <div className='centered-box'>
                         <select 
-                            className='single-select' 
+                            className='single-select'
+                            value={ targetVariant }
                             onChange={ (e) => {
                                 const help = e.target.value.split(':::');
                                 setTargetSet(help[0]);
@@ -99,7 +102,7 @@ export const EditMode = (props) => {
                                         className='single-select'
                                         onChange={ (e) => {
                                             setTargetProps(old => {
-                                                const help = old;
+                                                const help = JSON.parse(JSON.stringify(old));                       // Deep copy
                                                 help.find(p => p.name === property.name).value = e.target.value;
                                                 return help;
                                             });

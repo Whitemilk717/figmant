@@ -29,7 +29,9 @@ export async function createVariant(msg) {
     }
 
     const newVariant = originalVariant.createInstance();
-    newVariant.name = variantName;
+    
+    const num = await searchBox.nextVariantNum(variantName);;
+    newVariant.name = num + variantName;
 
     frame.appendChild(newVariant);
     

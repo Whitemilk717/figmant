@@ -77,8 +77,8 @@ export const EditMode = (props) => {
                                 setTargetVariant(help[2]);
                             }}
                         >
-                            { props.variants.map((v, i) => {
-                                return <option key={ i } value={ `${v.set}:::${v.frame}:::${v.variant}` }>
+                            { props.variants.map(v => {
+                                return <option key={ v.variant } value={ `${v.set}:::${v.frame}:::${v.variant}` }>
                                     { `[${v.set}]: ${v.frame} / ${v.variant}` }
                                 </option>
                             })}

@@ -26,17 +26,17 @@ export const searchBox = {
 
     // Function to search for a new variable number
     nextVarNum: async function () {
-        let targetNumber = 1;
+        let newNum = 1;
         const variables = await figma.variables.getLocalVariablesAsync();
         
         variables.forEach(variable => {
             if (variable.name.includes('Text-var-')) {
                 const number = Number(variable.name.split('-').pop())
-                if (number == targetNumber) targetNumber++;
+                if (number == newNum) newNum++;
             }
         })
 
-        return targetNumber;
+        return newNum;
     },
 
 
@@ -69,5 +69,23 @@ export const searchBox = {
         );
 
         return originalVariant;
-    }
+    },
+
+
+    // Function to search for a new variant number
+    nextVariantNum: async function (name) {
+        let newNum = 1;
+
+        const instances = figma.currentPage.findAll(n => n.type === 'INSTANCE') as InstanceNode[];
+        
+        instances.forEach(instance => {
+            if (instance.name.includes(name)) {
+                const indx = instance.name.indexOf('-');
+                let num = Number(instance.name.slice(0, indx));
+                if (num == newNum) newNum++;
+            }
+        });
+
+        return (String(newNum) + '-');
+    },
 }

@@ -109,6 +109,7 @@ export const CreateMode = (props) => {
 
                                         <select 
                                             className='single-select'
+                                            value={ targetProps.find(p => p.name === property.name)?.value }
                                             onChange={ (e) => {
                                                 setTargetProps(old => {
                                                     const help = JSON.parse(JSON.stringify(old));                       // Deep copy

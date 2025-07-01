@@ -72,7 +72,6 @@ export const EditMode = (props) => {
                     <div className='centered-box'>
                         <select 
                             className='single-select'
-                            value={ targetVariant }
                             onChange={ (e) => {
                                 const help = e.target.value.split(':::');
                                 setTargetSet(help[0]);
@@ -100,6 +99,7 @@ export const EditMode = (props) => {
 
                                     <select 
                                         className='single-select'
+                                        value={ targetProps.find(p => p.name === property.name)?.value }
                                         onChange={ (e) => {
                                             setTargetProps(old => {
                                                 const help = JSON.parse(JSON.stringify(old));                       // Deep copy

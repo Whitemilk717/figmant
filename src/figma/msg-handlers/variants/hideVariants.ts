@@ -12,7 +12,6 @@ export async function hideVariants(msg) {
     // Data
     const groupedTargets: {
         cleanName: string;          // Variant name without numbering
-        // set: string;             // Name of the main component set
         targets: InstanceNode[];    // Nodes to hide
         nodes: InstanceNode[];      // Nodes that share the same set and cleanName
     }[] = [];
@@ -24,7 +23,6 @@ export async function hideVariants(msg) {
 
         const indx = variant.name.indexOf('-');
         const cleanName = variant.name.slice(indx+1);
-        // const set = (await variant.getMainComponentAsync()).parent.name;
 
         const group = groupedTargets.find(g =>
             g.cleanName === cleanName

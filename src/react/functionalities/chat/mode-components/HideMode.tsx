@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 export const HideMode = (props) => {
 
     // Data
-    const [targetNodes, setTargetNodes] = useState([]);   // nodes selected by the wizard
+    const [targetNodes, setTargetNodes] = useState([]);   // Nodes selected by the wizard
 
 
     // Function to send the hide message

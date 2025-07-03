@@ -93,20 +93,13 @@ export const searchBox = {
     },
 
 
-    // Function to search every variant with the same properties
+    // Function to search every variant with the same name
     homonymousVariants: async function (cleanName) {
         
         const nodes = figma.currentPage.findAll(
             n => n.type === 'INSTANCE' &&
-            n.name.includes(cleanName)                  // Same property values
+            n.name.includes(cleanName)                  // Same name => property values
         ) as InstanceNode[];
-
-        // const group = [];
-        // for (const canditate of canditates) {
-        //     const componentSet = (await canditate.getMainComponentAsync()).parent.name;
-
-        //     if (componentSet === set) group.push(canditate);                // Same component set
-        // }
         
         return nodes;
     },

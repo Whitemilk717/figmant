@@ -110,6 +110,20 @@ export async function hideNodes(msg) {
         }
 
     });
+
+
+    // Sending log message about nodes hiding
+    for (const target of msg.targets) {
+        if (target.includes('icon')) {
+            await sendBox.logMsg(`Icon "${target}" has been hidden`);
+        }
+        else if (target.includes('question')) {
+            await sendBox.logMsg(`Question "${target}" has been hidden`);
+        }
+        else {
+            await sendBox.logMsg(`Answer "${target}" has been hidden`);
+        }
+    }
     
 
     // Send to WizardApp every selectable node

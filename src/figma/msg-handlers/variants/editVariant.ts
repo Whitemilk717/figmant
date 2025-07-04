@@ -12,7 +12,7 @@ export async function editVariant(msg) {
     // Data
     let newVariantName = '';
     const frame = searchBox.frameNamed(msg.frame) as FrameNode;
-    const oldVariant = frame.children.find(node => node.name === msg.variant) as InstanceNode; 
+    const oldVariant = frame.children.find(node => node.name === msg.variant) as InstanceNode;
 
 
     // Configuration of the edited variant name
@@ -43,6 +43,10 @@ export async function editVariant(msg) {
     const newCleanName = newVariantName.slice(indx+1);                  // New variant name without without numbering
     const editedVariantsGroup = searchBox.variantsToReorder(newCleanName);
     reorder(editedVariantsGroup);
+
+
+    // Sending log message about variant editing
+    await sendBox.logMsg(`Variant "${msg.variant}" in frame "${frame.name}" from the component set "${msg.set}" has been changed to "${oldVariant.name}"`);
 
 
     // Send every created variants in the current page to WizardApp

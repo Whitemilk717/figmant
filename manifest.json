@@ -10,8 +10,10 @@
   ],
   "networkAccess": {
     "allowedDomains": [
-      "https://img.icons8.com"
-    ]
+      "https://img.icons8.com",
+      "http://localhost:3000"
+    ],
+    "reasoning": "Retrieve default images and logs for WoZ session."
   },
   "main": "./dist/code.js",
   "ui": "./dist/ui.html"

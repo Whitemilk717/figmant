@@ -1,12 +1,11 @@
 /* Imports
 ------------------------------------------------------------ */
 import { sendBox } from "../../boxes/sendBox";
-import { searchBox } from "../../boxes/searchBox";
 
 
 /* Function to edit a wizard answer
 ------------------------------------------------------------ */
-export function editAnswer(msg): void {
+export async function editAnswer(msg) {
 
 
     // Search of the selected answer
@@ -16,10 +15,14 @@ export function editAnswer(msg): void {
 
 
     // Edit the answer
-    if (answer) {
-        const text = answer.children[0] as TextNode;
-        text.characters = msg.payload;                  // Text content replacement
-    }
+    const text = answer.children[0] as TextNode;
+    const oldCharacters = text.characters;
+    text.characters = msg.payload;                  // Text content replacement
+
+
+    // Sending log message about answer editing
+    await sendBox.logMsg(`Answer "${answer.name}" content in the frame "Figmant-chat-box" has been changed from "${oldCharacters}" to "${text.characters}"`);
+
 
 
     // Send to WizardApp every selectable chatbox node and answer node 

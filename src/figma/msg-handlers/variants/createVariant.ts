@@ -34,6 +34,10 @@ export async function createVariant(msg) {
     newVariant.name = num + variantName;
 
     frame.appendChild(newVariant);
+
+
+    // Sending log message about variant creation
+    await sendBox.logMsg(`Variant "${newVariant.name}" from the component set "${msg.set}" has been created in frame "${frame.name}"`);
     
 
     // Send every created variants in the current page to WizardApp

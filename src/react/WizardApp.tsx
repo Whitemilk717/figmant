@@ -5,6 +5,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { ChatFunctionality } from './functionalities/chat/ChatFunctionality';
 import { VariantsFunctionality } from './functionalities/variants/VariantsFunctionality';
+import { NavigationFunctionality } from './functionalities/navigation/NavigationFunctionality';
 
 
 /* WizardApp React component 
@@ -72,6 +73,7 @@ export const WizardApp = () => {
                 <select className='single-select' onChange={ (e) => setFunctionality(e.target.value) }>
                     <option value='chat'>Chat manipulation</option>
                     <option value='variants'>Variants manipulation</option>
+                    <option value='navigation'>Frame navigation</option>
                 </select>
             </div>
             <hr />
@@ -84,6 +86,10 @@ export const WizardApp = () => {
 
             { functionality === 'variants' && (
                 <VariantsFunctionality compSets={ compSets } frames={ frames } variants={ variants } />
+            )}
+
+            { functionality === 'navigation' && (
+                <NavigationFunctionality frames={ frames } />
             )}
 
 

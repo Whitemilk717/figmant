@@ -30,7 +30,7 @@ export const CreateMode = (props) => {
     }
 
 
-    // Whenever the selectable component sets change, if possible and if nothing has been selected yet, the first one is selected (default value)
+    // Whenever the selectable component sets change, if possible, the first one is selected (default value)
     useEffect(() => {
         if (props.compSets.length != 0) {
             setTargetSet(props.compSets[0].name);
@@ -131,7 +131,6 @@ export const CreateMode = (props) => {
                         }
                     </div>
                     <hr />
-
 
 
                     <div className='centered-box'>

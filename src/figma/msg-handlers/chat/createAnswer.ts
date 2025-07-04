@@ -24,6 +24,9 @@ export async function createAnswer(msg) {
         chatBox.appendChild(newIcon);
 
         newIcon.children[0].name = newIcon.name + ' / Image';
+
+        // Sending log message about icon creation
+        await sendBox.logMsg(`Icon "${newIcon.name}" has been created in the frame "${chatBox.name}"`);
     }
 
 
@@ -37,6 +40,10 @@ export async function createAnswer(msg) {
     const newText = newAnswer.children[0] as TextNode;
     newText.characters = msg.payload;
     chatBox.appendChild(newAnswer);
+
+
+    // Sending log message about answer creation
+    await sendBox.logMsg(`Answer "${newAnswer.name}" has been created in the frame "${chatBox.name}"`);
 
 
     // Send to WizardApp every selectable chatbox node and answer node 

@@ -11,6 +11,7 @@ import { hideVariants } from './figma/msg-handlers/variants/hideVariants';
 import { createQuestion } from './figma/msg-handlers/chat/createQuestion';
 import { createVariant } from './figma/msg-handlers/variants/createVariant';
 import { createComponentsFrame } from './figma/init-functions/createComponentsFrame';
+import { goToDestinationFrame } from './figma/msg-handlers/navigation/goToDestinationFrame';
 
 
 /* Async function main (it calls some async functions)
@@ -67,10 +68,14 @@ async function main() {
     sendBox.compSets();
     sendBox.frames();
     sendBox.createdVariants();
+
+
+    // Sending log message about session start
+    await sendBox.logMsg('startSession');
     
     
     // Handler for messages received from React components
-    figma.ui.onmessage = (msg) => {
+    figma.ui.onmessage = async (msg) => {
         
         if (msg.type === 'createAnswer') {
             createAnswer(msg);
@@ -99,8 +104,13 @@ async function main() {
         else if (msg.type === 'hideVariants') {
             hideVariants(msg);
         }
+
+        else if (msg.type === 'goTo') {
+            goToDestinationFrame(msg);
+        }
     
         else if (msg.type === 'closePlugin') {
+            await sendBox.logMsg('stopSession');
             figma.closePlugin();
         }
     }

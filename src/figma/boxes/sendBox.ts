@@ -141,4 +141,47 @@ export const sendBox = {
             variants: variants
         });
     },
+
+
+    // Function to send a log msg to the local server
+    logMsg: async function (body) {
+        const date = new Date();
+
+        try {
+            if (body === 'startSession') {
+                const dd = date.getDate();
+                const mm = date.getMonth() + 1;     // return 0-11
+                const yyyy = date.getFullYear();
+
+                await fetch('http://localhost:3000/', {
+                    method: 'POST',
+                    body: `==============================================================================================================================\n================================================= New WoZ session [${dd}/${mm}/${yyyy}] =================================================\n==============================================================================================================================`
+                });
+            }
+            
+            else {
+                const h = date.getHours();
+                const m = date.getMinutes();
+                const s = date.getSeconds();
+                const ms = date.getMilliseconds();
+
+                if (body === 'stopSession') {
+                    await fetch('http://localhost:3000/', {
+                        method: 'POST',
+                        body: `[${h}h   :   ${m}m   :  ${s}s    :   ${ms}ms]    Session ended\n\n`
+                    });
+                }
+
+                else {
+                    await fetch('http://localhost:3000/', {
+                        method: 'POST',
+                        body: `[${h}h   :   ${m}m   :  ${s}s    :   ${ms}ms]    ${body}`
+                    });
+                }
+
+            }
+        } catch (e) {
+            console.log('Error writing log file. Please check if local server is running');
+        }
+    }
 }

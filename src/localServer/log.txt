@@ -1,0 +1,13 @@
+==============================================================================================================================
+================================================= New WoZ session [4/7/2025] =================================================
+==============================================================================================================================
+[16h   :   16m   :  7s    :   355ms]    Variant "1-State=Mixed" from the component set "Checkbox" has been created in frame "Figmant-chat-box"
+[16h   :   16m   :  22s    :   207ms]    Variant "2-State=Checked" from the component set "Checkbox-clone" has been created in frame "Figmant-chat-box"
+[16h   :   16m   :  41s    :   836ms]    Variant "1-State=Unchecked" in frame "Figmant-chat-box" from the component set "Checkbox-clone" has been changed to "1-State=Mixed"
+[16h   :   17m   :  3s    :   984ms]    Variant "1-State=Checked" has been hidden
+[16h   :   17m   :  4s    :   295ms]    Variant "2-State=Checked" has been hidden
+[16h   :   17m   :  4s    :   343ms]    Variant "1-State=Mixed" has been hidden
+[16h   :   17m   :  4s    :   373ms]    Variant "2-State=Mixed" has been hidden
+[16h   :   20m   :  54s    :   508ms]    Session ended
+
+

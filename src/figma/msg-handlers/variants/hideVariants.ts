@@ -13,7 +13,7 @@ export async function hideVariants(msg) {
     const groupedTargets: {
         cleanName: string;          // Variant name without numbering
         targets: InstanceNode[];    // Nodes to hide
-        nodes: InstanceNode[];      // Nodes that share the same set and cleanName
+        nodes: InstanceNode[];      // Nodes that share the same cleanName
     }[] = [];
 
 
@@ -36,6 +36,14 @@ export async function hideVariants(msg) {
                 targets: [variant],
                 nodes: await searchBox.homonymousVariants(cleanName)
             });
+        }
+    }
+
+
+    // Sending log message about variants hiding BEFORE reordering
+    for (const g of groupedTargets) {
+        for (const target of g.targets) {
+            await sendBox.logMsg(`Variant "${target.name}" has been hidden`);
         }
     }
 

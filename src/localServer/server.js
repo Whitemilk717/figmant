@@ -1,8 +1,8 @@
 /* Requires
 ------------------------------------------------------------ */
-const fs = require('fs').promises;           // File system module
-const express = require('express'); // Loading of the library
-const cors = require('cors');
+const cors = require('cors');       // Cross-Origin Resource Sharing
+const fs = require('fs').promises;  // Asynchronous file system methods
+const express = require('express'); // Express library for web servers
 
 
 /* Data

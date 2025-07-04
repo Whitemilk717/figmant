@@ -21,7 +21,7 @@ export async function editAnswer(msg) {
 
 
     // Sending log message about answer editing
-    await sendBox.logMsg(`Answer "${answer.name}" content in the frame "Figmant-chat-box" has been changed from "${oldCharacters}" to "${text.characters}"`);
+    await sendBox.logMsg(`Answer "${answer.name}" content in frame "Figmant-chat-box" has been changed from "${oldCharacters}" to "${text.characters}"`);
 
 
 

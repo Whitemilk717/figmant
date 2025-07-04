@@ -115,13 +115,13 @@ export async function hideNodes(msg) {
     // Sending log message about nodes hiding
     for (const target of msg.targets) {
         if (target.includes('icon')) {
-            await sendBox.logMsg(`Icon "${target}" has been hidden`);
+            await sendBox.logMsg(`Icon "${target}" in frame "${chatBox.name}" has been hidden`);
         }
         else if (target.includes('question')) {
-            await sendBox.logMsg(`Question "${target}" has been hidden`);
+            await sendBox.logMsg(`Question "${target}" in frame "${chatBox.name}" has been hidden`);
         }
         else {
-            await sendBox.logMsg(`Answer "${target}" has been hidden`);
+            await sendBox.logMsg(`Answer "${target}" in frame "${chatBox.name}" has been hidden`);
         }
     }
     

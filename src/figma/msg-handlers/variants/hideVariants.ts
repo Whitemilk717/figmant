@@ -43,7 +43,8 @@ export async function hideVariants(msg) {
     // Sending log message about variants hiding BEFORE reordering
     for (const g of groupedTargets) {
         for (const target of g.targets) {
-            await sendBox.logMsg(`Variant "${target.name}" has been hidden`);
+            const componentSet = (await target.getMainComponentAsync()).parent;
+            await sendBox.logMsg(`Variant "${target.name}" in frame "${target.parent.name}" from the component set "${componentSet.name}" has been hidden`);
         }
     }
 

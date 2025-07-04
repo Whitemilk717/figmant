@@ -112,7 +112,7 @@ export async function createQuestion(msg) {
         newIcon.children[0].name = newIcon.name + ' / Image';
 
         // Sending log message about icon creation
-        await sendBox.logMsg(`Icon "${newIcon.name}" has been created in the frame "${chatBox.name}"`);
+        await sendBox.logMsg(`Icon "${newIcon.name}" has been created in frame "${chatBox.name}"`);
     }
 
 
@@ -273,7 +273,7 @@ export async function createQuestion(msg) {
 
 
     // Sending log message about question creation
-    await sendBox.logMsg(`Question "${newQuestion.name}" has been created in the frame "${chatBox.name}"`);
+    await sendBox.logMsg(`Question "${newQuestion.name}" has been created in frame "${chatBox.name}"`);
 
 
     // Send to WizardApp every selectable chatbox node and answer node 

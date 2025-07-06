@@ -21,15 +21,19 @@ export const ChatFunctionality = (props) => {
     return (
         <div>
 
-            <p>Select a chat mode:</p>
-            <div className='centered-box'>
-                <select className='single-select' onChange={ (e) => setMode(e.target.value) } >
-                    <option value='create'>Create new answer</option>
-                    <option value='edit'>Edit answer</option>
-                    <option value='hide'>Hide messages and icons</option>
-                </select>
-            </div>
-            <hr />
+            <fieldset>
+                <legend><b>Chat mode</b></legend>
+
+                <p>Select a chat mode:</p>
+                <div className='centered-box'>
+                    <select className='single-select' onChange={ (e) => setMode(e.target.value) } >
+                        <option value='create'>Create new answer</option>
+                        <option value='edit'>Edit answer</option>
+                        <option value='hide'>Hide messages and icons</option>
+                    </select>
+                </div>
+            </fieldset>
+            <br /><br />
 
             { mode === 'create' &&  (
                 <CreateMode />
@@ -42,7 +46,6 @@ export const ChatFunctionality = (props) => {
             { mode === 'hide' && (
                 <HideMode nodes={ props.nodes } />
             )}
-            <hr />
 
         </div>
     );

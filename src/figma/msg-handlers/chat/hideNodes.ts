@@ -6,7 +6,7 @@ import { searchBox } from "../../boxes/searchBox";
 
 /* Function to hide a message
 ------------------------------------------------------------ */
-export async function hideNodes(msg) {
+export async function hideNodes(msg, logsOn) {
 
 
     // General data
@@ -115,13 +115,13 @@ export async function hideNodes(msg) {
     // Sending log message about nodes hiding
     for (const target of msg.targets) {
         if (target.includes('icon')) {
-            await sendBox.logMsg(`Icon "${target}" in frame "${chatBox.name}" has been hidden`);
+            if (logsOn === 'ON') await sendBox.logMsg(`Icon "${target}" in frame "${chatBox.name}" has been hidden`);
         }
         else if (target.includes('question')) {
-            await sendBox.logMsg(`Question "${target}" in frame "${chatBox.name}" has been hidden`);
+            if (logsOn === 'ON') await sendBox.logMsg(`Question "${target}" in frame "${chatBox.name}" has been hidden`);
         }
         else {
-            await sendBox.logMsg(`Answer "${target}" in frame "${chatBox.name}" has been hidden`);
+            if (logsOn === 'ON') await sendBox.logMsg(`Answer "${target}" in frame "${chatBox.name}" has been hidden`);
         }
     }
     

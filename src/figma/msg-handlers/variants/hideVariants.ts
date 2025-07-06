@@ -6,7 +6,7 @@ import { searchBox } from '../../boxes/searchBox';
 
 /* Function to hide some variants
 ------------------------------------------------------------ */
-export async function hideVariants(msg) {
+export async function hideVariants(msg, logsOn) {
 
 
     // Data
@@ -44,7 +44,7 @@ export async function hideVariants(msg) {
     for (const g of groupedTargets) {
         for (const target of g.targets) {
             const componentSet = (await target.getMainComponentAsync()).parent;
-            await sendBox.logMsg(`Variant "${target.name}" in frame "${target.parent.name}" from the component set "${componentSet.name}" has been hidden`);
+            if (logsOn === 'ON') await sendBox.logMsg(`Variant "${target.name}" in frame "${target.parent.name}" from the component set "${componentSet.name}" has been hidden`);
         }
     }
 

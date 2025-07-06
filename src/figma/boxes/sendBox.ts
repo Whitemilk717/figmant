@@ -26,7 +26,7 @@ export const sendBox = {
         chatBox.children.forEach(node => {
             if (node.name.includes('hidden')) return;
 
-            if (node.name.includes('answer')){
+            else if (node.name.includes('answer')){
                 const frame = node as FrameNode;                                        // Cast
                 const text = frame.children[0] as TextNode;
                 infos = {
@@ -36,10 +36,9 @@ export const sendBox = {
                 }
                 answers.push(infos);
                 nodes.push(infos);
-                return;
             }
 
-            if (node.name.includes('question')){
+            else if (node.name.includes('question')){
                 const frame = node as FrameNode;                                        // Cast
                 const scrollableBox = frame.children[0] as FrameNode;
                 const text = scrollableBox.children[0] as TextNode;
@@ -49,10 +48,9 @@ export const sendBox = {
                     fullText: text.characters.length < this.previewLength? true:false
                 }
                 nodes.push(infos);
-                return;
             }
-
-            nodes.push({ name: node.name });
+            
+            else if (node.name.includes('icon')) nodes.push({ name: node.name });
         });
 
         figma.ui.postMessage({

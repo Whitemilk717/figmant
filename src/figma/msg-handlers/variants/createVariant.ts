@@ -6,7 +6,7 @@ import { searchBox } from '../../boxes/searchBox';
 
 /* Function to create a variant
 ------------------------------------------------------------ */
-export async function createVariant(msg) {
+export async function createVariant(msg, logsOn) {
 
 
     // Data
@@ -37,7 +37,7 @@ export async function createVariant(msg) {
 
 
     // Sending log message about variant creation
-    await sendBox.logMsg(`Variant "${newVariant.name}" from the component set "${msg.set}" has been created in frame "${frame.name}"`);
+    if (logsOn === 'ON') await sendBox.logMsg(`Variant "${newVariant.name}" from the component set "${msg.set}" has been created in frame "${frame.name}"`);
     
 
     // Send every created variants in the current page to WizardApp

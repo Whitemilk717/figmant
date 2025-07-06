@@ -43,39 +43,50 @@ export const CreateMode = () => {
     // JSX
     return (
         <div>
-            <div className='centered-checkbox'>    
-                <input type="checkbox" checked={ answerIconFlag } id='answerIconFlag' onChange={ (e) => setAnswerIconFlag(e.target.checked) } />
-                <label htmlFor="answerIconFlag">Answer with icon</label>
-            </div>
-            <hr />
+            <fieldset>
+                <legend><b>Answer section</b></legend>
 
-            <p>Pre-made answers:</p>
-            <div className='premade-answers-box'>
-                <button className='green-button' onClick={ () => sendMsg('Thinking...', false) }>Thinking...</button>
-                <button className='green-button' onClick={ () => sendMsg("I don't know", false) }>I don't know</button>
-                <button className='green-button' onClick={ () => sendMsg('Can you repeat?', false) }>Can you repeat?</button>
-            </div>
-            <hr />
-
-            <p>Write your custom answer:</p>
-            <form onSubmit={ (e) => { e.preventDefault(); sendMsg('', false) }}>
-                <textarea className='custom-answer-box' rows={ 4 } cols={ 43 } ref={ wizardText }></textarea>
-                <div className='centered-box'>
-                    <button className='spaced-green-button' type="submit">Invia</button>
+                <p>Want to add an icon?</p>
+                <div className='centered-checkbox'>    
+                    <input type="checkbox" checked={ answerIconFlag } id='answerIconFlag' onChange={ (e) => setAnswerIconFlag(e.target.checked) } />
+                    <label htmlFor="answerIconFlag">Answer with icon</label>
                 </div>
-            </form>
-            <hr />
+                <hr />
 
-            <div className='centered-checkbox'>    
-                <input type="checkbox" checked={ questionIconFlag } id='questionIconFlag' onChange={ (e) => setQuestionIconFlag(e.target.checked) } />
-                <label htmlFor="questionIconFlag">Question with icon</label>
-            </div>
-            <hr />
+                <p>Pre-made answers:</p>
+                <div className='premade-answers-box'>
+                    <button className='green-button' onClick={ () => sendMsg('Thinking...', false) }>Thinking...</button>
+                    <button className='green-button' onClick={ () => sendMsg("I don't know", false) }>I don't know</button>
+                    <button className='green-button' onClick={ () => sendMsg('Can you repeat?', false) }>Can you repeat?</button>
+                </div>
+                <hr />
 
-            <div className='centered-box'>
-                <p>Go to the next question:</p>
-                <button className='green-button' onClick={ () => sendMsg('', true) }>Next question</button>
-            </div>
+                <p>Write your custom answer:</p>
+                <form id='customAnswer' onSubmit={ (e) => { e.preventDefault(); sendMsg('', false) }}>
+                    <textarea className='custom-answer-box' rows={ 4 } cols={ 38 } ref={ wizardText }></textarea>
+                </form>
+                <div className='centered-box'>
+                    <button className='green-button' type="submit" form='customAnswer'>Invia</button>
+                </div>
+            </fieldset>
+            <br /><br />
+            
+
+            <fieldset>
+                <legend><b>Question section</b></legend>
+
+                <p>Want to add an icon?</p>    
+                <div className='centered-checkbox'>    
+                    <input type="checkbox" checked={ questionIconFlag } id='questionIconFlag' onChange={ (e) => setQuestionIconFlag(e.target.checked) } />
+                    <label htmlFor="questionIconFlag">Question with icon</label>
+                </div>
+                <hr />
+
+                <p>Go to next question:</p>    
+                <div className='centered-box'>
+                    <button className='green-button' onClick={ () => sendMsg('', true) }>Next question</button>
+                </div>
+            </fieldset>
         </div>
     )
 }

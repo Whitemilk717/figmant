@@ -34,42 +34,42 @@ export const HideMode = (props) => {
 
     // JSX
     return (
-        <div>
-            <p>Select the existing variants:</p>
-            { props.variants.length === 0 && (
-                <div className='centered-box'>
-                    <p style={{ textAlign: 'center' }}>There are no selectable existing variants</p>
-                </div>
-            )}
+            <fieldset>
+                <legend><b>Variants selection</b></legend>
 
-            { props.variants.length != 0 && (
-                <div>
+                <p>Select the existing variants:</p>
+                { props.variants.length === 0 && (
                     <div className='centered-box'>
-                        <select 
-                            className='multiple-select'
-                            multiple
-                            onChange={ (e) => {
-                                setTargetVariants(Array.from(e.target.selectedOptions, option => option.value));
-                            }}
-                        >
-                            { props.variants.map(v => {
-                                return <option key={ v.variant } value={ v.variant }>
-                                    { `[${v.set}]: ${v.frame} / ${v.variant}` }
-                                </option>
-                            })}
-                        </select>
+                        <p style={{ textAlign: 'center' }}>There are no selectable existing variants</p>
                     </div>
-                    <hr />
+                )}
+
+                { props.variants.length != 0 && (
+                    <div>
+                        <div className='centered-box'>
+                            <select 
+                                className='multiple-select'
+                                multiple
+                                onChange={ (e) => {
+                                    setTargetVariants(Array.from(e.target.selectedOptions, option => option.value));
+                                }}
+                            >
+                                { props.variants.map(v => {
+                                    return <option key={ v.variant } value={ v.variant }>
+                                        { `[${v.set}]: ${v.frame} / ${v.variant}` }
+                                    </option>
+                                })}
+                            </select>
+                        </div>
+                        <hr />
 
 
-                    <div className='centered-box'>
-                        <p>Hide the variants:</p>
-                        <button className='green-button' onClick={ () => sendMsg() }>Hide</button>
+                        <div className='centered-box'>
+                            <p>Hide the variants:</p>
+                            <button className='green-button' onClick={ () => sendMsg() }>Hide</button>
+                        </div>
                     </div>
-                </div>
-            )}
-
-
-        </div>
+                )}
+            </fieldset>
     )
 }

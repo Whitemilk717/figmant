@@ -60,15 +60,18 @@ export const EditMode = (props) => {
     // JSX
     return (
         <div>
-            <p>Select the existing variant:</p>
-            { props.variants.length === 0 && (
-                <div className='centered-box'>
-                    <p style={{ textAlign: 'center' }}>There are no selectable existing variants</p>
-                </div>
-            )}
 
-            { props.variants.length != 0 && (
-                <div>
+            <fieldset>
+                <legend><b>Variant selection</b></legend>
+
+                <p>Select the existing variant:</p>
+                { props.variants.length === 0 && (
+                    <div className='centered-box'>
+                        <p style={{ textAlign: 'center' }}>There are no selectable existing variants</p>
+                    </div>
+                )}
+
+                { props.variants.length != 0 && (
                     <div className='centered-box'>
                         <select 
                             className='single-select'
@@ -86,49 +89,54 @@ export const EditMode = (props) => {
                             })}
                         </select>
                     </div>
-                    <hr />
+                )}
+            </fieldset>
 
 
-                    <p>Select the new variant property values:</p>
-                    {
-                        props.variants
-                            .find(v => v.set === targetSet)
-                            ?.properties.map(property => {
-                                return <div key={ property.name } className='inline-box'>
-                                    <p>{ property.name }</p>
+            { props.variants.length != 0 && (
+                <div>
+                    <br /><br />
+                    <fieldset>
+                        <legend><b>New variant property values</b></legend>
 
-                                    <select 
-                                        className='single-select'
-                                        value={ targetProps.find(p => p.name === property.name)?.value }
-                                        onChange={ (e) => {
-                                            setTargetProps(old => {
-                                                const help = JSON.parse(JSON.stringify(old));                       // Deep copy
-                                                help.find(p => p.name === property.name).value = e.target.value;
-                                                return help;
-                                            });
-                                        }}
-                                    >
-                                        { property.values.map(value => (
-                                            <option key={ value } value={ value }>
-                                                { value }
-                                            </option>
-                                        ))
-                                        }
-                                    </select>
-                                </div>
-                            })
-                    }
-                    <hr />
+                        <p>Select the new variant property values:</p>
+                        {
+                            props.variants
+                                .find(v => v.set === targetSet)
+                                ?.properties.map(property => {
+                                    return <div key={ property.name } className='inline-box'>
+                                        <p>{ property.name }</p>
 
-
-                    <div className='centered-box'>
-                        <p>Edit the variant:</p>
-                        <button className='green-button' onClick={ () => sendMsg() }>Edit</button>
-                    </div>
+                                        <select 
+                                            className='inline-select'
+                                            value={ targetProps.find(p => p.name === property.name)?.value }
+                                            onChange={ (e) => {
+                                                setTargetProps(old => {
+                                                    const help = JSON.parse(JSON.stringify(old));                       // Deep copy
+                                                    help.find(p => p.name === property.name).value = e.target.value;
+                                                    return help;
+                                                });
+                                            }}
+                                        >
+                                            { property.values.map(value => (
+                                                <option key={ value } value={ value }>
+                                                    { value }
+                                                </option>
+                                            ))
+                                            }
+                                        </select>
+                                    </div>
+                                })
+                        }
+                    
+                        <hr />
+                        <div className='centered-box'>
+                            <p>Edit the variant:</p>
+                            <button className='green-button' onClick={ () => sendMsg() }>Edit</button>
+                        </div>
+                    </fieldset>
                 </div>
             )}
-
-
         </div>
     )
 }

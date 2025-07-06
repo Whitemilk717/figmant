@@ -56,89 +56,99 @@ export const CreateMode = (props) => {
     // JSX
     return (
         <div>
-            <p>Select the frame where you want to create your new variant:</p>
-            { props.frames.length === 0 && (
-                <p style={{ textAlign: 'center' }}>There are no selectable frames</p>
-            )}
 
-            { props.frames.length != 0 && (
-                <div className='centered-box'>
-                    <select className='single-select' onChange={ (e) => setTargetFrame(e.target.value) }>
-                        { props.frames.map(frame => {
-                            return <option key={ frame } value={ frame }>
-                                { frame }
-                            </option>
-                        }) }
-                    </select>
-                </div>
-            )}
-            <hr />
+            <fieldset>
+                <legend><b>Destination frame</b></legend>
 
+                <p>Select the frame where you want to create your new variant:</p>
+                { props.frames.length === 0 && (
+                    <p style={{ textAlign: 'center' }}>There are no selectable frames</p>
+                )}
 
-            <p>Select the component set:</p>
-            { props.compSets.length === 0 && (
-                <div className='centered-box'>
-                    <p style={{ textAlign: 'center' }}>There are no selectable components sets</p>
-                </div>
-            )}
-
-
-            { props.compSets.length != 0 && (
-                <div>
+                { props.frames.length != 0 && (
                     <div className='centered-box'>
-                        <select 
-                            className='single-select' onChange={ (e) => setTargetSet(e.target.value) }>
-                            { props.compSets.map(set => {
-                                return <option key={ set.name } value={ set.name }>
-                                    { set.name }
+                        <select className='single-select' onChange={ (e) => setTargetFrame(e.target.value) }>
+                            { props.frames.map(frame => {
+                                return <option key={ frame } value={ frame }>
+                                    { frame }
                                 </option>
                             }) }
                         </select>
                     </div>
-                    <hr />
+                )}
+            </fieldset>
+            <br /><br />
 
-
-                    <p>Select the variant property values:</p>
-                    <div>
-                        {
-                            props.compSets
-                                .find(set => set.name === targetSet)
-                                ?.properties.map(property => {
-                                    return <div key={ property.name } className='inline-box'>
-                                        <p>{ property.name }</p>
-
-                                        <select 
-                                            className='single-select'
-                                            value={ targetProps.find(p => p.name === property.name)?.value }
-                                            onChange={ (e) => {
-                                                setTargetProps(old => {
-                                                    const help = JSON.parse(JSON.stringify(old));                       // Deep copy
-                                                    help.find(p => p.name === property.name).value = e.target.value;
-                                                    return help;
-                                                });
-                                            }}
-                                        >
-                                            { property.values.map(value => (
-                                                <option key={ value } value={ value }>
-                                                    { value }
-                                                </option>
-                                            ))
-                                            }
-                                        </select>
-                                    </div>
-                                })
-
-                        }
-                    </div>
-                    <hr />
-
-
+            
+            <fieldset>
+                <legend><b>Variant selection</b></legend>
+                
+                <p>Select the component set:</p>
+                { props.compSets.length === 0 && (
                     <div className='centered-box'>
-                        <p>Create the variant:</p>
-                        <button className='green-button' onClick={ () => sendMsg() }>Create</button>
+                        <p style={{ textAlign: 'center' }}>There are no selectable components sets</p>
                     </div>
-                </div>
-            )} 
+                )}
+
+
+                { props.compSets.length != 0 && (
+                    <div>
+                        <div className='centered-box'>
+                            <select 
+                                className='single-select' onChange={ (e) => setTargetSet(e.target.value) }>
+                                { props.compSets.map(set => {
+                                    return <option key={ set.name } value={ set.name }>
+                                        { set.name }
+                                    </option>
+                                }) }
+                            </select>
+                        </div>
+                        <hr />
+
+
+                        <p>Select the variant property values:</p>
+                        <div>
+                            {
+                                props.compSets
+                                    .find(set => set.name === targetSet)
+                                    ?.properties.map(property => {
+                                        return <div key={ property.name } className='inline-box'>
+                                            <p>{ property.name }</p>
+
+                                            <select 
+                                                className='inline-select'
+                                                value={ targetProps.find(p => p.name === property.name)?.value }
+                                                onChange={ (e) => {
+                                                    setTargetProps(old => {
+                                                        const help = JSON.parse(JSON.stringify(old));                       // Deep copy
+                                                        help.find(p => p.name === property.name).value = e.target.value;
+                                                        return help;
+                                                    });
+                                                }}
+                                            >
+                                                { property.values.map(value => (
+                                                    <option key={ value } value={ value }>
+                                                        { value }
+                                                    </option>
+                                                ))
+                                                }
+                                            </select>
+                                        </div>
+                                    })
+
+                            }
+                        </div>
+                        <hr />
+
+
+                        <div className='centered-box'>
+                            <p>Create the variant:</p>
+                            <button className='green-button' onClick={ () => sendMsg() }>Create</button>
+                        </div>
+                    </div>
+                )} 
+            </fieldset>
+            
         </div>
     )
 }

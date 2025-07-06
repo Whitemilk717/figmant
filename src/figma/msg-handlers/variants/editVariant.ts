@@ -6,7 +6,7 @@ import { searchBox } from '../../boxes/searchBox';
 
 /* Function to edit a variant
 ------------------------------------------------------------ */
-export async function editVariant(msg) {
+export async function editVariant(msg, logsOn) {
 
 
     // Data
@@ -46,7 +46,7 @@ export async function editVariant(msg) {
 
 
     // Sending log message about variant editing
-    await sendBox.logMsg(`Variant "${msg.variant}" in frame "${frame.name}" from the component set "${msg.set}" has been changed to "${oldVariant.name}"`);
+    if (logsOn === 'ON') await sendBox.logMsg(`Variant "${msg.variant}" in frame "${frame.name}" from the component set "${msg.set}" has been changed to "${oldVariant.name}"`);
 
 
     // Send every created variants in the current page to WizardApp

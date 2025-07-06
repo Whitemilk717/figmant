@@ -21,12 +21,21 @@
 ------------------------------------------------------------ */
 .single-select {
     height: 40px;
+    width: 300px;
     border-radius: 10px;
     background-color: #EEEBEB;
 }
 
 .multiple-select {
     height: 200px;
+    width: 300px;
+    overflow-x: auto;
+    border-radius: 10px;
+    background-color: #EEEBEB;
+}
+
+.inline-select {
+    height: 40px;
     border-radius: 10px;
     background-color: #EEEBEB;
 }
@@ -80,7 +89,7 @@
 
 .spaced-green-button {
     height: 40px;
-    margin-top: 5px;
+    margin-top: 20px;
     border-radius: 10px;
     border-color: #04AA6D;
     background-color: #EEEBEB;

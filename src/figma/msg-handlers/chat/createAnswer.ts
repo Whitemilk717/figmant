@@ -6,7 +6,7 @@ import { searchBox } from '../../boxes/searchBox';
 
 /* Function to create an answer node
 ------------------------------------------------------------ */
-export async function createAnswer(msg) {
+export async function createAnswer(msg, logsOn) {
 
 
     // Data
@@ -26,7 +26,7 @@ export async function createAnswer(msg) {
         newIcon.children[0].name = newIcon.name + ' / Image';
 
         // Sending log message about icon creation
-        await sendBox.logMsg(`Icon "${newIcon.name}" has been created in frame "${chatBox.name}"`);
+        if (logsOn === 'ON') await sendBox.logMsg(`Icon "${newIcon.name}" has been created in frame "${chatBox.name}"`);
     }
 
 
@@ -43,7 +43,7 @@ export async function createAnswer(msg) {
 
 
     // Sending log message about answer creation
-    await sendBox.logMsg(`Answer "${newAnswer.name}" has been created in frame "${chatBox.name}"`);
+    if (logsOn === 'ON') await sendBox.logMsg(`Answer "${newAnswer.name}" has been created in frame "${chatBox.name}"`);
 
 
     // Send to WizardApp every selectable chatbox node and answer node 

@@ -20,16 +20,19 @@ export const VariantsFunctionality = (props) => {
     // JSX 
     return (
         <div>
+            <fieldset>
+                <legend><b>Variant mode</b></legend>
 
-            <p>Select a variants mode:</p>
-            <div className='centered-box'>
-                <select className='single-select' onChange={ (e) => setMode(e.target.value) } >
-                    <option value='create'>Create new variant</option>
-                    <option value='edit'>Edit variant</option>
-                    <option value='hide'>Hide variants</option>
-                </select>
-            </div>
-            <hr />
+                <p>Select a variants mode:</p>
+                <div className='centered-box'>
+                    <select className='single-select' onChange={ (e) => setMode(e.target.value) } >
+                        <option value='create'>Create new variant</option>
+                        <option value='edit'>Edit variant</option>
+                        <option value='hide'>Hide variants</option>
+                    </select>
+                </div>
+            </fieldset>
+            <br /><br />
 
             { mode === 'create' &&  (
                 <CreateMode compSets={ props.compSets } frames={ props.frames }/>
@@ -42,7 +45,6 @@ export const VariantsFunctionality = (props) => {
             { mode === 'hide' && (
                 <HideMode variants={ props.variants } />
             )}
-            <hr />
 
         </div>
     );

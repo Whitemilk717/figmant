@@ -5,7 +5,7 @@ import { sendBox } from "../../boxes/sendBox";
 
 /* Function to edit a wizard answer
 ------------------------------------------------------------ */
-export async function editAnswer(msg) {
+export async function editAnswer(msg, logsOn) {
 
 
     // Search of the selected answer
@@ -21,7 +21,7 @@ export async function editAnswer(msg) {
 
 
     // Sending log message about answer editing
-    await sendBox.logMsg(`Answer "${answer.name}" content in frame "Figmant-chat-box" has been changed from "${oldCharacters}" to "${text.characters}"`);
+    if (logsOn === 'ON') await sendBox.logMsg(`Answer "${answer.name}" content in frame "Figmant-chat-box" has been changed from "${oldCharacters}" to "${text.characters}"`);
 
 
 

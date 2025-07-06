@@ -11,7 +11,7 @@ import { hideVariants } from './figma/msg-handlers/variants/hideVariants';
 import { createQuestion } from './figma/msg-handlers/chat/createQuestion';
 import { createVariant } from './figma/msg-handlers/variants/createVariant';
 import { createComponentsFrame } from './figma/init-functions/createComponentsFrame';
-import { goToDestinationFrame } from './figma/msg-handlers/navigation/goToDestinationFrame';
+// import { goToDestinationFrame } from './figma/msg-handlers/navigation/goToDestinationFrame';
 
 
 /* Async function main (it calls some async functions)
@@ -20,6 +20,7 @@ async function main() {
 
 
     // Data
+    let logsOn;                 // Wizard choice about writing log files
     const uiWidth = 370;
     const uiHeight = 700;
     const previewLength = 30;
@@ -45,10 +46,9 @@ async function main() {
     const botFont = (botAnswerComp.children[0] as TextNode).fontName as FontName;
     const userQuestionComp = searchBox.nodeNamed('User-question') as FrameNode;    
     const userFont = (
-                        (userQuestionComp.children[0] as FrameNode)
-                        .children[0] as TextNode
-                    )
-                    .fontName as FontName;
+        (userQuestionComp.children[0] as FrameNode)
+        .children[0] as TextNode
+    ).fontName as FontName;
 
     await figma.loadFontAsync(botFont);
     await figma.loadFontAsync(userFont);
@@ -68,49 +68,50 @@ async function main() {
     sendBox.compSets();
     sendBox.frames();
     sendBox.createdVariants();
-
-
-    // Sending log message about session start
-    await sendBox.logMsg('startSession');
     
     
     // Handler for messages received from React components
     figma.ui.onmessage = async (msg) => {
         
-        if (msg.type === 'createAnswer') {
-            createAnswer(msg);
+        if (msg.type === 'logsOn') {
+            logsOn = msg.logsOn;
+            if (logsOn === 'ON') await sendBox.logMsg('startSession');
+        }
+        
+        else if (msg.type === 'createAnswer') {
+            createAnswer(msg, logsOn);
         }
     
         else if (msg.type === 'editAnswer') {
-            editAnswer(msg);
+            editAnswer(msg, logsOn);
         }
     
         else if (msg.type === 'createQuestion') {
-            createQuestion(msg);
+            createQuestion(msg, logsOn);
         }
     
         else if (msg.type === 'hideNodes') {
-            hideNodes(msg);
+            hideNodes(msg, logsOn);
         }
 
         else if (msg.type === 'createVariant') {
-            createVariant(msg);
+            createVariant(msg, logsOn);
         }
 
         else if (msg.type === 'editVariant') {
-            editVariant(msg);
+            editVariant(msg, logsOn);
         }
 
         else if (msg.type === 'hideVariants') {
-            hideVariants(msg);
+            hideVariants(msg, logsOn);
         }
 
-        else if (msg.type === 'goTo') {
-            goToDestinationFrame(msg);
-        }
+        // else if (msg.type === 'goTo') {
+        //     goToDestinationFrame(msg);
+        // }
     
         else if (msg.type === 'closePlugin') {
-            await sendBox.logMsg('stopSession');
+            if (logsOn === 'ON') await sendBox.logMsg('stopSession');
             figma.closePlugin();
         }
     }

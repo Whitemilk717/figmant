@@ -55,7 +55,6 @@ export const WizardApp = () => {
     // Function that sends the wizard's choice about the log file when it is selected
     useEffect(() => {
         if (logsOn != '') {
-            console.log(logsOn);
             parent.postMessage({
                 pluginMessage: {
                     type: 'logsOn',

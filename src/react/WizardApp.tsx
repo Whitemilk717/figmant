@@ -21,6 +21,7 @@ export const WizardApp = () => {
     const [compSets, setcompSets] = useState([]);               // Selectable component sets
     const [variants, setVariants] = useState([]);               // Selectable created variants
     const [selectedOpt, setSelectedOpt] = useState('');         // Selected radio option
+    const [premadeAnswers, setPremadeAnswers] = useState([]);   // Pre-made answers created by the wizard for the chat functionality
     const [functionality, setFunctionality] = useState('chat'); // Plugin functionality chosen by the wizard
 
 
@@ -133,7 +134,7 @@ export const WizardApp = () => {
                     <br /><br />
 
                     { functionality === 'chat' && (
-                        <ChatFunctionality answers={ answers } nodes={ nodes } />
+                        <ChatFunctionality answers={ answers } nodes={ nodes } premadeAnswers={ premadeAnswers } setPremadeAnswers={ setPremadeAnswers }/>
                     )}
 
                     { functionality === 'variants' && (

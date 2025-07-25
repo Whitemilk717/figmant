@@ -11,13 +11,15 @@ export const EditMode = (props) => {
 
 
     // Data
+    let newButtonFlag = false;                              // Flag to create a new pre-made answer
     const wizardText = useRef<HTMLTextAreaElement>(null);   // Text inserted by the wizard
     const [targetAnswer, setTargetAnswer] = useState('');   // Answer selected by the wizard
 
 
     // Function to send the edit answer msg
     function sendMsg(premadeAnswer: string): void {
-        if (premadeAnswer.length != 0) {
+
+        if (premadeAnswer.length != 0) {            // If != 0, the wizard has chosen a pre-made answer
             parent.postMessage({
                 pluginMessage: {
                     type: 'editAnswer',
@@ -25,15 +27,28 @@ export const EditMode = (props) => {
                     payload: premadeAnswer
                 }
             }, '*');
-        } else {
-            parent.postMessage({
-                pluginMessage: {
-                    type: 'editAnswer',
-                    target: targetAnswer,
-                    payload: wizardText.current.value
-                }
-            }, '*');
+            return;
         }
+
+        parent.postMessage({                        // Otherwise, the wizard has typed a custom answer
+            pluginMessage: {
+                type: 'editAnswer',
+                target: targetAnswer,
+                payload: wizardText.current.value
+            }
+        }, '*');
+    }
+
+
+    // Function to handle the submit of the custom text
+    function handleSubmit() {
+        if (newButtonFlag) {                                                                // If true, the wizard wants to create a new pre-made answer button
+            props.setPremadeAnswers([...props.premadeAnswers, wizardText.current.value]);
+            newButtonFlag = false;
+            return;
+        }
+
+        sendMsg('');                                                                        // Otherwise, the wizard wants to edit a msg
     }
 
 
@@ -85,18 +100,24 @@ export const EditMode = (props) => {
                                 <div>
                                     <p>Pre-made answers:</p>
                                     <div className='premade-answers-box'>
-                                        <button className='green-button' onClick={ () => sendMsg('Thinking...') }>Thinking...</button>
+                                        <button className='green-button' onClick={ () => sendMsg('Thinking...') }>Thinking...</button>          {/* Default pre-made answers */}     
                                         <button className='green-button' onClick={ () => sendMsg("I don't know") }>I don't know</button>
                                         <button className='green-button' onClick={ () => sendMsg('Can you repeat?') }>Can you repeat?</button>
+
+                                        { props.premadeAnswers.map((text, i) => {                                                               {/* Custom pre-made answers */}
+                                            return <button className='green-button' key={i} onClick={ () => sendMsg(text) }>{text}</button>
+                                        }) }
                                     </div>
                                     <hr />
 
                                     <p>Write your custom answer:</p>
-                                    <form id='customAnswer' onSubmit={ (e) => { e.preventDefault(); sendMsg('') }}>
+                                    <form id='customAnswer' onSubmit={ (e) => { e.preventDefault(); handleSubmit() }}>
                                         <textarea className='custom-answer-box' rows={ 4 } cols={ 38 } ref={ wizardText }></textarea>
                                     </form>
                                     <div className='centered-box'>
                                         <button className='green-button' type="submit" form='customAnswer'>Invia</button>
+                                        <br />
+                                        <button className='green-button' type="submit" onClick={ () => newButtonFlag=true } form='customAnswer'>Create a new pre-made answer button</button>
                                     </div>
                                 </div>
                             )}

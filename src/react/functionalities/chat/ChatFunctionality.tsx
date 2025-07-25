@@ -36,11 +36,11 @@ export const ChatFunctionality = (props) => {
             <br /><br />
 
             { mode === 'create' &&  (
-                <CreateMode />
+                <CreateMode premadeAnswers={ props.premadeAnswers } setPremadeAnswers={ props.setPremadeAnswers }/>
             )}
 
             { mode === 'edit' && (
-                <EditMode answers={ props.answers } />
+                <EditMode answers={ props.answers } premadeAnswers={ props.premadeAnswers } setPremadeAnswers={ props.setPremadeAnswers } />
             )}
 
             { mode === 'hide' && (

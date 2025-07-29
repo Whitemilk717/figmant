@@ -69,12 +69,12 @@ export const CreateMode = (props) => {
 
                 <p>Pre-made answers:</p>
                 <div className='premade-answers-box'>
-                    <button className='green-button' onClick={ () => sendMsg('Thinking...', false) }>Thinking...</button>           {/* Default pre-made answers */}
-                    <button className='green-button' onClick={ () => sendMsg("I don't know", false) }>I don't know</button>
-                    <button className='green-button' onClick={ () => sendMsg('Can you repeat?', false) }>Can you repeat?</button>
+                    <button className='custom-answer-button' onClick={ () => sendMsg('Thinking...', false) }>Thinking...</button>           {/* Default pre-made answers */}
+                    <button className='custom-answer-button' onClick={ () => sendMsg("I don't know", false) }>I don't know</button>
+                    <button className='custom-answer-button' onClick={ () => sendMsg('Can you repeat?', false) }>Can you repeat?</button>
 
                     { props.premadeAnswers.map((text, i) => {                                                                       {/* Custom pre-made answers */}
-                        return <button className='green-button' key={i} onClick={ () => sendMsg(text, false) }>{text}</button>
+                        return <button className='custom-answer-button' key={i} onClick={ () => sendMsg(text, false) }>{text}</button>
                     }) }
                 </div>
                 <hr />

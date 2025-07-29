@@ -74,15 +74,22 @@
     background-color: #DBF7E8;
 }
 
+.custom-answer-button {
+    min-height: 40px;
+    max-width: 310px;
+    border-radius: 10px;
+    border-color: #04AA6D;
+    overflow-wrap: break-word;
+    background-color: #EEEBEB;
+}
+
 
 /* Green buttons
 ------------------------------------------------------------ */
 .green-button {
     min-height: 40px;
-    max-width: 300px;
     border-radius: 10px;
     border-color: #04AA6D;
-    overflow-wrap: break-word;
     background-color: #EEEBEB;
 }
 

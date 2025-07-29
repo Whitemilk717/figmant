@@ -100,12 +100,12 @@ export const EditMode = (props) => {
                                 <div>
                                     <p>Pre-made answers:</p>
                                     <div className='premade-answers-box'>
-                                        <button className='green-button' onClick={ () => sendMsg('Thinking...') }>Thinking...</button>          {/* Default pre-made answers */}     
-                                        <button className='green-button' onClick={ () => sendMsg("I don't know") }>I don't know</button>
-                                        <button className='green-button' onClick={ () => sendMsg('Can you repeat?') }>Can you repeat?</button>
+                                        <button className='custom-answer-button' onClick={ () => sendMsg('Thinking...') }>Thinking...</button>          {/* Default pre-made answers */}     
+                                        <button className='custom-answer-button' onClick={ () => sendMsg("I don't know") }>I don't know</button>
+                                        <button className='custom-answer-button' onClick={ () => sendMsg('Can you repeat?') }>Can you repeat?</button>
 
                                         { props.premadeAnswers.map((text, i) => {                                                               {/* Custom pre-made answers */}
-                                            return <button className='green-button' key={i} onClick={ () => sendMsg(text) }>{text}</button>
+                                            return <button className='custom-answer-button' key={i} onClick={ () => sendMsg(text) }>{text}</button>
                                         }) }
                                     </div>
                                     <hr />

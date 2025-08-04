@@ -62,7 +62,7 @@ export const HideMode = (props) => {
                             </option>
                         }) }
                     </select>
-                    <button className='spaced-green-button' onClick={ () => sendMsg() }>Invia</button>
+                    <button className='spaced-green-button' onClick={ () => sendMsg() }>Send</button>
                 </div>
             ) }
         </fieldset>

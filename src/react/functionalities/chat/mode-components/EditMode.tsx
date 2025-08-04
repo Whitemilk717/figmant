@@ -115,7 +115,7 @@ export const EditMode = (props) => {
                                         <textarea className='custom-answer-box' rows={ 4 } cols={ 38 } ref={ wizardText }></textarea>
                                     </form>
                                     <div className='centered-box'>
-                                        <button className='green-button' type="submit" form='customAnswer'>Invia</button>
+                                        <button className='green-button' type="submit" form='customAnswer'>Send</button>
                                         <br />
                                         <button className='green-button' type="submit" onClick={ () => newButtonFlag=true } form='customAnswer'>Create a new pre-made answer button</button>
                                     </div>

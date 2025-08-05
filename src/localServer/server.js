@@ -14,6 +14,14 @@ app.use(cors());
 app.use(express.text());    // middleware that parses incoming HTTP request bodies with a text/plain content type
 
 
+/* Server port
+------------------------------------------------------------ */
+app.listen(port, (err) => {
+    if (err) console.log('Error in server setup');
+    console.log(`Local server is listening on port ${port}...`);
+});
+
+
 /* Routes
 ------------------------------------------------------------ */
 app.post('/', (req, res) => {
@@ -21,12 +29,6 @@ app.post('/', (req, res) => {
 });
 
 
-/* Server port
------------------------------------------------------------- */
-app.listen(port, (err) => {
-    if (err) console.log('Error in server setup');
-    console.log(`Local server is listening on port ${port}...`);
-});
 
 
 
